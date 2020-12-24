@@ -81,6 +81,12 @@ public class MainActivity extends AppCompatActivity {
                     });
                 }catch (Exception e){
                     e.printStackTrace();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            CommonUtils.showDlgMsg(MainActivity.this,"用户名不存在，请先注册！");
+                        }
+                    });
                 }
             }
         }).start();

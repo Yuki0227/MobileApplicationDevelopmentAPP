@@ -58,6 +58,7 @@ public class RegisterActivity extends AppCompatActivity {
                 boolean registerSucceed = false;
                 try {
                     FormBody.Builder params = new FormBody.Builder();
+                    if (username.isEmpty() || password.isEmpty()) throw new Exception();
                     params.add("name", username);
                     params.add("password", password);
                     OkHttpClient client = new OkHttpClient();

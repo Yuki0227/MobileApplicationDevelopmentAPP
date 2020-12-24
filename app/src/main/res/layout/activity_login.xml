@@ -16,6 +16,8 @@
         android:paddingLeft="10dp"
         android:paddingRight="15dp"
         android:maxLines="1"
+        android:inputType="text"
+        android:lines="1"
 
         android:drawableLeft="@drawable/icon_user"
         android:drawablePadding="5dp"
@@ -35,6 +37,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="15dp"
         android:maxLines="1"
+        android:lines="1"
 
         android:drawableLeft="@drawable/icon_password"
         android:drawablePadding="5dp"

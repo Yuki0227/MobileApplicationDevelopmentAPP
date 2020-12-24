@@ -29,6 +29,6 @@ jobs:
       env:
        GITHUB_TOKEN: ${{ secrets.TOKEN }}
        APP_FOLDER: app
-       RELEASE_TITLE: New relese by Continuous Delivery ID:${{ GITHUB_RUN_ID }}
+       RELEASE_TITLE: New relese by Continuous Delivery ID:$GITHUB_RUN_NUMBER
         
       

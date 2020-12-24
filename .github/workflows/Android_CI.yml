@@ -26,6 +26,8 @@ jobs:
       run: ./gradlew assembleRelease
     - name: 查看文件
       run: |
+        cd /home/runner/work/
+        ls
         cd ./app/build/output/apk/release/
         ls
       

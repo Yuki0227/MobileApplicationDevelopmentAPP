@@ -28,7 +28,7 @@ jobs:
       uses: ShaunLWM/action-release-debugapk@master
       env:
        GITHUB_TOKEN: ${{ secrets.TOKEN }}
-       APP_FOLDER: /home/runner/work/android-app/android-app/app
-       RELEASE_TITLE: New relese by Continuous Delivery ID:GITHUB_RUN_ID
+       APP_FOLDER: app
+       RELEASE_TITLE: New relese by Continuous Delivery ID:${{ GITHUB_RUN_ID }}
         
       

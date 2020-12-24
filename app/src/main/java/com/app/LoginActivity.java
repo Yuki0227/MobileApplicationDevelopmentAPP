@@ -2,6 +2,7 @@ package com.app;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -9,6 +10,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.app.util.CommonUtils;
+import com.app.util.UserUtils;
 
 import org.json.JSONObject;
 
@@ -36,9 +38,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void initLayoutBind() {
-        et_username = findViewById(R.id.et_username);
+        et_username = findViewById(R.id.et_name);
         et_password = findViewById(R.id.et_password);
-        btn_login = findViewById(R.id.btn_login);
+        btn_login = findViewById(R.id.btn_signin);
         mainHandler = new Handler();
     }
 
@@ -67,14 +69,18 @@ public class LoginActivity extends AppCompatActivity {
                     params.add("password", password);
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
-                            .url("http://8.131.250.250/user/findByName")
+                            .url("http://8.131.250.250/user/find")
                             .post(params.build())
                             .build();
                     Response response = client.newCall(request).execute();
                     String responseData = Objects.requireNonNull(response.body()).string();
+                    Log.d("responseData", responseData);
                     JSONObject jsonObj = new JSONObject(responseData);
                     id = jsonObj.getString("id");
                     name = jsonObj.getString("name");
+
+                    UserUtils.getInstance().setUser(Integer.parseInt(id), name, "");
+
                     loginSucceed = true;
                 } catch (Exception e) {
                     e.printStackTrace();

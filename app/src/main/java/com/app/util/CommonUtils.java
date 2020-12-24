@@ -35,7 +35,6 @@ public class CommonUtils {
                 .setTitle("显示信息")
                 .setMessage(msg)
                 .setPositiveButton("确定",null)
-                .setNegativeButton("取消",null)
                 .create().show();
     }
 }

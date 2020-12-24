@@ -27,7 +27,7 @@
 
 
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="80dp" />
+        android:layout_marginTop="100dp" />
 
     <EditText
         android:id="@+id/et_password"
@@ -46,7 +46,7 @@
         android:inputType="textPassword"
         android:textSize="20sp"
 
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/et_name" />
 

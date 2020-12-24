@@ -28,6 +28,6 @@ jobs:
       run: |
         cd /home/runner/work/
         ls
-        cd ./app/build/output/apk/release/
+        cd /home/runner/work/android-app/android-app/app/build/output/apk/release/
         ls
       

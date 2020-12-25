@@ -1,4 +1,4 @@
-package com.app.entity;
+package com.app.task.entity;
 
 import java.sql.Date;
 

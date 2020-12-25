@@ -10,6 +10,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.app.register.RegisterActivity;
 import com.app.util.CommonUtils;
 import com.app.util.UserUtils;
 

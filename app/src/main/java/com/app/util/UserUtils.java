@@ -1,7 +1,5 @@
 package com.app.util;
 
-import com.app.entity.User;
-
 interface MyUserUtils {
     public void setUser(Integer id, String name, String password);
 

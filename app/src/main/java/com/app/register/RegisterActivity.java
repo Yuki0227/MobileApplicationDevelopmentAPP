@@ -1,4 +1,4 @@
-package com.app;
+package com.app.register;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.app.R;
 import com.app.util.CommonUtils;
 
 import org.json.JSONObject;

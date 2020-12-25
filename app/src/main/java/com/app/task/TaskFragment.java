@@ -34,7 +34,7 @@ public class TaskFragment extends Fragment {
 
     private ListView listView;
     private List<Map<String, String>> list = null;
-
+    //private TaskListViewAdapter taskListViewAdapter;
 
     @Nullable
     @Override
@@ -42,6 +42,8 @@ public class TaskFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_task, null);
 
         listView = view.findViewById(R.id.task_item);
+     //   taskListViewAdapter = new TaskListViewAdapter(getContext());
+
         list = new ArrayList<Map<String, String>>();
         for (int i = 0; i < 20; i++) {
             Map<String, String> map = new HashMap<String, String>();
@@ -56,6 +58,8 @@ public class TaskFragment extends Fragment {
             });
         listView.setAdapter(adapter);
 
+
+     //   listView.setAdapter(taskListViewAdapter);
         return view;
     }
 

@@ -1,16 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".email.EmailFragment">
+    android:orientation="vertical"
+    tools:context=".email.EmailFragment"
+    android:paddingTop="24dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/fragment_email"
-        android:textSize="30dp"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="这是EmailFragment" />
+        android:layout_height="55dp"
+        android:background="@color/white"
+        android:elevation="1dp"
+        tools:ignore="UselessParent">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/email_activity_main_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="20dp"
+            android:gravity="center"
+            android:text="邮箱"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            tools:ignore="HardcodedText" />
+
+        <ImageView
+            android:id="@+id/email_activity_main_edit_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="70dp"
+            android:padding="8dp"
+            android:src="@drawable/email_edit"
+            android:background="@drawable/email_button_click"
+            android:clickable="true"
+            android:focusable="true"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/email_activity_main_settings_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="11dp"
+            android:padding="8dp"
+            android:src="@drawable/email_settings"
+            android:background="@drawable/email_button_click"
+            android:clickable="true"
+            android:focusable="true"
+            tools:ignore="ContentDescription" />
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/email_activity_main_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>

@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText et_name;
     private EditText et_password;
     private Handler mainHandler;
+    private RelativeLayout relativeLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +42,16 @@ public class LoginActivity extends AppCompatActivity {
         initListener();
     }
 
+
+
     private void initLayoutBind() {
         et_name = findViewById(R.id.et_name);
         et_password = findViewById(R.id.et_password);
         btn_login = findViewById(R.id.btn_signin);
         btn_register = findViewById(R.id.btn_register);
         mainHandler = new Handler();
+        relativeLayout = findViewById(R.id.login_title);
+
     }
 
     private void initListener() {
@@ -60,6 +66,21 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
                 startActivity(intent);
+            }
+        });
+
+        //主页图片修改
+        et_password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    //获得焦点时，修改背景属性
+                    //R.drawable.edit_text_bg_focus为背景资源
+                    relativeLayout.setBackgroundResource(R.drawable.bg_inpassword);
+                }
+                else{
+                    relativeLayout.setBackgroundResource(R.drawable.bg_denglu);
+                }
             }
         });
     }

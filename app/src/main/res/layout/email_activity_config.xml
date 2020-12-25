@@ -4,7 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:background="@color/white"
+    android:paddingTop="24dp">
 
     <include layout="@layout/email_title_bar" />
 
@@ -39,7 +40,7 @@
                     android:layout_marginStart="20dp"
                     android:text="邮箱"
                     android:textSize="16sp"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/black"
                     tools:ignore="HardcodedText" />
 
                 <EditText
@@ -67,7 +68,7 @@
                     android:layout_marginStart="20dp"
                     android:text="密码"
                     android:textSize="16sp"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/black"
                     tools:ignore="HardcodedText" />
 
                 <EditText
@@ -95,7 +96,7 @@
                     android:layout_marginStart="20dp"
                     android:text="昵称"
                     android:textSize="16sp"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/black"
                     tools:ignore="HardcodedText" />
 
                 <EditText
@@ -132,7 +133,7 @@
                     android:layout_marginStart="20dp"
                     android:text="地址"
                     android:textSize="16sp"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/black"
                     tools:ignore="HardcodedText" />
 
                 <EditText
@@ -159,7 +160,7 @@
                     android:layout_marginStart="20dp"
                     android:text="端口"
                     android:textSize="16sp"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/black"
                     tools:ignore="HardcodedText" />
 
                 <EditText
@@ -187,7 +188,7 @@
                     android:layout_marginStart="20dp"
                     android:text="是否开启加密"
                     android:textSize="16sp"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/black"
                     tools:ignore="HardcodedText" />
 
                 <Switch
@@ -220,7 +221,7 @@
                     android:layout_marginStart="20dp"
                     android:text="地址"
                     android:textSize="16sp"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/black"
                     tools:ignore="HardcodedText" />
 
                 <EditText
@@ -246,7 +247,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:text="端口"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
                     tools:ignore="HardcodedText" />
 
@@ -275,7 +276,7 @@
                     android:layout_marginStart="20dp"
                     android:text="是否开启加密"
                     android:textSize="16sp"
-                    android:textColor="@color/colorAccent"
+                    android:textColor="@color/black"
                     tools:ignore="HardcodedText" />
 
                 <Switch

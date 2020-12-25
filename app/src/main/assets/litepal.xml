@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="MsgDB" />
+    <version value="8" />
+    <list>
+        <mapping class="com.app.email.table.LocalMsg" />
+        <mapping class="com.app.email.table.LocalFile" />
+    </list>
+</litepal>

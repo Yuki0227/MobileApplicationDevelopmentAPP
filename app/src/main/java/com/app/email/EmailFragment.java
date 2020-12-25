@@ -2,12 +2,12 @@ package com.app.email;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -31,13 +31,8 @@ import java.util.List;
  */
 public class EmailFragment extends Fragment {
 
-    private String fragmentText;
-    private TextView fragmentTextView;
-    private ListView listView;
 
-    public EmailFragment(String fragmentText) {
-        this.fragmentText = fragmentText;
-    }
+    private ListView listView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,7 +87,11 @@ public class EmailFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        Looper.myQueue().addIdleHandler(() -> {
+            initLayoutBind();
+            initData();
+            return false;
+        });
 
-        initLayoutBind();
     }
 }

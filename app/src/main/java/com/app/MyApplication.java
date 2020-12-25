@@ -25,6 +25,26 @@ public class MyApplication extends Application {
         context = getApplicationContext();
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
+
+
+        //临时添加固定数据
+        String account, password, nickname, smtpHost, imapHost, smtpPort, imapPort;
+        boolean smtpSSL, imapSSL;
+        account = "";
+        password = "";
+        smtpHost = "smtp.qq.com";
+        imapHost = "imap.qq.com";
+        smtpPort = "465";
+        imapPort = "993";
+        smtpSSL = true;
+        imapSSL = true;
+        EmailKit.Config config = new EmailKit.Config()
+                .setSMTP(smtpHost, Integer.parseInt(smtpPort), smtpSSL)
+                .setIMAP(imapHost, Integer.parseInt(imapPort), imapSSL)
+                .setAccount(account)
+                .setPassword(password);
+        setConfig(config);
+
     }
 
     public static Context getContext() {

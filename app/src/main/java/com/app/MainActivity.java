@@ -3,7 +3,6 @@ package com.app;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -58,7 +57,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View view) {
-        FragmentTransaction fragmentTransaction = mfragmentManger.beginTransaction();//只能是局部变量，不能为全局变量，否则不能重复commit
+        FragmentTransaction fragmentTransaction = mfragmentManger.beginTransaction();
+        //只能是局部变量，不能为全局变量，否则不能重复commit
         //FragmentTransaction只能使用一次
         hideAllFragment(fragmentTransaction);
         switch (view.getId()) {
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 setAllFalse();
                 emailLinear.setSelected(true);
                 if (emailFragment == null) {
-                    emailFragment = new EmailFragment("Email");
+                    emailFragment = new EmailFragment();
                     fragmentTransaction.add(R.id.fragment_frame, emailFragment);
                 } else {
                     fragmentTransaction.show(emailFragment);
@@ -132,7 +132,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (userFragment != null) {
             fragmentTransaction.hide(userFragment);
         }
-
     }
 
     private void setAllFalse() {

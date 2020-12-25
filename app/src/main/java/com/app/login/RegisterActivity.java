@@ -1,4 +1,4 @@
-package com.app.register;
+package com.app.login;
 
 import android.os.Bundle;
 import android.util.Log;

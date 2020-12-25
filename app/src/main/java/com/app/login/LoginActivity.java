@@ -1,4 +1,4 @@
-package com.app;
+package com.app.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.app.register.RegisterActivity;
+import com.app.R;
 import com.app.util.CommonUtils;
 import com.app.util.UserUtils;
 

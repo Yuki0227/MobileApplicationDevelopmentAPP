@@ -10,4 +10,15 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+
+    <!-- task_toolbar标题与NavigationIcon的距离 -->
+    <style name="ToolbarStyle" parent="Base.Widget.AppCompat.Toolbar">
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetStartWithNavigation">0dp</item>
+    </style>
+    <!-- task_toolbar标题字体大小 -->
+    <style name="ToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/sp_18</item>
+    </style>
+
 </resources>

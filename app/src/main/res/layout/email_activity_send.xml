@@ -54,6 +54,7 @@
         android:minLines="3"
         android:textColor="@color/colorAccent"
         android:textSize="16sp"
-        tools:ignore="Autofill,HardcodedText,LabelFor,TextFields" />
+        tools:ignore="Autofill,HardcodedText,LabelFor,TextFields"
+        android:layout_marginBottom="10dp"/>
 
 </LinearLayout>

@@ -218,7 +218,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-
+                    android:thumb="@drawable/switch_thumb"
+                    android:track="@drawable/switch_track"
                     android:layout_marginTop="5dp"
                     android:checked="true" />
 
@@ -314,6 +315,8 @@
                     android:id="@+id/email_activity_config_imap_ssl_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:thumb="@drawable/switch_thumb"
+                    android:track="@drawable/switch_track"
                     android:layout_marginStart="10dp"
                     android:checked="true"
                     android:layout_marginTop="5dp"/>

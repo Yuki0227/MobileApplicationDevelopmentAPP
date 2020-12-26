@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#F0F8FF"
     android:paddingTop="24dp">
 
     <include layout="@layout/email_title_bar" />
@@ -20,6 +20,7 @@
             tools:ignore="UselessLeaf">
 
             <TextView
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -38,20 +39,24 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="邮箱"
+                    android:text="邮箱:"
                     android:textSize="16sp"
                     android:textColor="@color/black"
                     tools:ignore="HardcodedText" />
 
                 <EditText
                     android:id="@+id/email_activity_config_account_et"
+                    android:background="@drawable/bg_edittext"
+                    android:paddingLeft="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="20dp"
                     android:hint="example@domain.com"
                     android:inputType="textEmailAddress"
                     android:singleLine="true"
+
+
                     android:textSize="16sp"
                     tools:ignore="Autofill,HardcodedText" />
 
@@ -66,22 +71,27 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="密码"
+                    android:text="密码:"
                     android:textSize="16sp"
                     android:textColor="@color/black"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText"
+                    android:layout_marginTop="5dp"/>
 
                 <EditText
                     android:id="@+id/email_activity_config_password_et"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_edittext"
+                    android:paddingLeft="10dp"
+                    android:layout_height="30dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="20dp"
                     android:hint="密码/授权码"
                     android:inputType="textWebPassword"
                     android:singleLine="true"
                     android:textSize="16sp"
-                    tools:ignore="Autofill,HardcodedText" />
+                    tools:ignore="Autofill,HardcodedText"
+
+                    android:layout_marginTop="5dp"/>
 
             </LinearLayout>
 
@@ -94,15 +104,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="昵称"
+                    android:text="昵称:"
                     android:textSize="16sp"
                     android:textColor="@color/black"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText"
+                    android:layout_marginTop="5dp"/>
 
                 <EditText
                     android:id="@+id/email_activity_config_nickname_et"
+                    android:background="@drawable/bg_edittext"
+                    android:paddingLeft="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
+
+                    android:layout_marginTop="5dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="20dp"
                     android:singleLine="true"
@@ -131,15 +146,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="地址"
+                    android:text="地址:"
                     android:textSize="16sp"
                     android:textColor="@color/black"
                     tools:ignore="HardcodedText" />
 
                 <EditText
                     android:id="@+id/email_activity_config_smtp_host_et"
+                    android:background="@drawable/bg_edittext"
+                    android:paddingLeft="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="20dp"
                     android:singleLine="true"
@@ -158,22 +175,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="端口"
+                    android:text="端口:"
                     android:textSize="16sp"
                     android:textColor="@color/black"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText"
+                    android:layout_marginTop="5dp"/>
 
                 <EditText
                     android:id="@+id/email_activity_config_smtp_port_et"
+                    android:background="@drawable/bg_edittext"
+                    android:paddingLeft="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="20dp"
                     android:hint="请填写端口号"
                     android:inputType="number"
                     android:singleLine="true"
                     android:textSize="16sp"
-                    tools:ignore="Autofill,HardcodedText" />
+                    tools:ignore="Autofill,HardcodedText"
+                    android:layout_marginTop="5dp"/>
 
             </LinearLayout>
 
@@ -189,13 +210,16 @@
                     android:text="是否开启加密"
                     android:textSize="16sp"
                     android:textColor="@color/black"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText"
+                    android:layout_marginTop="5dp"/>
 
                 <Switch
                     android:id="@+id/email_activity_config_smtp_ssl_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+
+                    android:layout_marginTop="5dp"
                     android:checked="true" />
 
             </LinearLayout>
@@ -219,15 +243,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="地址"
+                    android:text="地址:"
                     android:textSize="16sp"
                     android:textColor="@color/black"
                     tools:ignore="HardcodedText" />
 
                 <EditText
                     android:id="@+id/email_activity_config_imap_host_et"
+                    android:background="@drawable/bg_edittext"
+                    android:paddingLeft="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="20dp"
                     android:singleLine="true"
@@ -246,22 +272,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:text="端口"
+                    android:text="端口:"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText"
+                    android:layout_marginTop="5dp"/>
 
                 <EditText
                     android:id="@+id/email_activity_config_imap_port_et"
+                    android:background="@drawable/bg_edittext"
+                    android:paddingLeft="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="30dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="20dp"
                     android:hint="请填写端口号"
                     android:inputType="number"
                     android:singleLine="true"
                     android:textSize="16sp"
-                    tools:ignore="Autofill,HardcodedText" />
+                    tools:ignore="Autofill,HardcodedText"
+                    android:layout_marginTop="5dp"/>
 
             </LinearLayout>
 
@@ -277,14 +307,16 @@
                     android:text="是否开启加密"
                     android:textSize="16sp"
                     android:textColor="@color/black"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText"
+                    android:layout_marginTop="5dp"/>
 
                 <Switch
                     android:id="@+id/email_activity_config_imap_ssl_switch"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:checked="true" />
+                    android:checked="true"
+                    android:layout_marginTop="5dp"/>
 
             </LinearLayout>
 
@@ -292,7 +324,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="60dp">
 
                 <Button
                     android:id="@+id/email_activity_config_db_btn"
@@ -302,6 +334,9 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
+
+                    android:background="@drawable/ic_click_bt"
+                    android:textColor="@color/white"
                     android:text="清除缓存消息"
                     tools:ignore="HardcodedText" />
 
@@ -313,6 +348,9 @@
                     android:layout_marginTop="10dp"
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="20dp"
+
+                    android:background="@drawable/ic_click_bt"
+                    android:textColor="@color/white"
                     android:text="清除缓存文件"
                     tools:ignore="HardcodedText" />
 

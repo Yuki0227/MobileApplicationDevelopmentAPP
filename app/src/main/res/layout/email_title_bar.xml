@@ -29,7 +29,8 @@
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:ignore="RelativeOverlap,RtlHardcoded" />
+        tools:ignore="RelativeOverlap,RtlHardcoded"
+        />
 
     <ImageView
         android:id="@+id/email_title_bar_function_iv"
@@ -43,5 +44,9 @@
         android:clickable="true"
         android:focusable="true"
         tools:ignore="ContentDescription" />
+
+
+
+
 
 </RelativeLayout>

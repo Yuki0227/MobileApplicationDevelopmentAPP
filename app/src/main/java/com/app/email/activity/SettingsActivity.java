@@ -1,6 +1,5 @@
 package com.app.email.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.app.R;
@@ -41,9 +40,9 @@ public class SettingsActivity extends BaseActivity {
                     LitePal.deleteAll(LocalMsg.class);
                     MicroKV.customize("config").clear();
                     EmailKit.destroy();
-                    Intent intent = new Intent(this, ConfigActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
+//                    Intent intent = new Intent(this, ConfigActivity.class);
+//                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                    startActivity(intent);
                 });
     }
 

@@ -13,9 +13,9 @@ import androidx.fragment.app.Fragment;
 
 import com.app.MyApplication;
 import com.app.R;
+import com.app.email.activity.ConfigActivity;
 import com.app.email.activity.ListActivity;
 import com.app.email.activity.SendActivity;
-import com.app.email.activity.SettingsActivity;
 import com.app.email.controls.Controls;
 import com.smailnet.emailkit.EmailKit;
 import com.smailnet.microkv.MicroKV;
@@ -73,7 +73,7 @@ public class EmailFragment extends Fragment {
                 .setOnClickListener(v -> startActivity(new Intent(getActivity(), SendActivity.class)));
 
         getView().findViewById(R.id.email_activity_main_settings_btn)
-                .setOnClickListener(v -> startActivity(new Intent(getActivity(), SettingsActivity.class)));
+                .setOnClickListener(v -> startActivity(new Intent(getActivity(), ConfigActivity.class)));
 
         listView = getView().findViewById(R.id.email_activity_main_list);
         listView.setOnItemClickListener((parent, view, position, id) -> {

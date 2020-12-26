@@ -1,6 +1,7 @@
 package com.app.email.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.widget.EditText;
 import android.widget.Switch;
@@ -9,8 +10,11 @@ import com.app.MyApplication;
 import com.app.R;
 import com.app.email.BaseActivity;
 import com.app.email.controls.Controls;
+import com.app.email.table.LocalMsg;
 import com.smailnet.emailkit.EmailKit;
 import com.smailnet.microkv.MicroKV;
+
+import org.litepal.LitePal;
 
 public class ConfigActivity extends BaseActivity {
 
@@ -21,6 +25,31 @@ public class ConfigActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.email_activity_config);
+        findViewById(R.id.email_activity_config_db_btn)
+                .setOnClickListener(v -> {
+                    LitePal.deleteAll(LocalMsg.class);
+                    Controls.toast("已清除");
+                });
+
+        findViewById(R.id.email_activity_config_sp_btn)
+                .setOnClickListener(v -> {
+                    MicroKV.customize("config", true).removeKV("folder_name");
+                    Controls.toast("已清除");
+                });
+
+        new Handler().postDelayed(() -> {
+            MicroKV kv = MicroKV.customize("config", true);
+            if (kv.containsKV("account")) {
+                EmailKit.Config config = new EmailKit.Config()
+                        .setAccount(kv.getString("account"))
+                        .setPassword(kv.getString("password"))
+                        .setSMTP(kv.getString("smtp_host"), kv.getInt("smtp_port"), kv.getBoolean("smtp_ssl"))
+                        .setIMAP(kv.getString("imap_host"), kv.getInt("imap_port"), kv.getBoolean("imap_ssl"));
+                MyApplication.setConfig(config);
+                fillData();
+            }
+        }, 0);
+
         Controls.getTitleBar()
                 .display(this, "服务器设置", R.drawable.email_confirm, () -> {
                     if (setData()) {
@@ -33,7 +62,6 @@ public class ConfigActivity extends BaseActivity {
                                     public void onSuccess() {
                                         saveData();
                                         progressDialog.dismiss();
-                                        //startActivity(new Intent(ConfigActivity.this, ));
                                         finish();
                                     }
 
@@ -45,6 +73,22 @@ public class ConfigActivity extends BaseActivity {
                                 }));
                     }
                 });
+    }
+
+
+    private void fillData() {
+        EmailKit.Config config = MyApplication.getConfig();
+
+
+        ((EditText) findViewById(R.id.email_activity_config_account_et)).setText(config.getAccount());
+        ((EditText) findViewById(R.id.email_activity_config_password_et)).setText(config.getPassword());
+        ((EditText) findViewById(R.id.email_activity_config_smtp_host_et)).setText(config.getSMTPHost());
+        ((EditText) findViewById(R.id.email_activity_config_imap_host_et)).setText(config.getIMAPHost());
+        ((EditText) findViewById(R.id.email_activity_config_smtp_port_et)).setText(String.valueOf(config.getSMTPPort()));
+        ((EditText) findViewById(R.id.email_activity_config_imap_port_et)).setText(String.valueOf(config.getIMAPPort()));
+        ((Switch) findViewById(R.id.email_activity_config_smtp_ssl_switch)).setChecked(true);
+        ((Switch) findViewById(R.id.email_activity_config_imap_ssl_switch)).setChecked(true);
+
     }
 
     /**

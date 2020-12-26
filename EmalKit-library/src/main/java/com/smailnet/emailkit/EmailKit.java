@@ -344,35 +344,35 @@ public final class EmailKit {
             return this;
         }
 
-        String getAccount() {
+        public String getAccount() {
             return account;
         }
 
-        String getPassword() {
+        public String getPassword() {
             return password;
         }
 
-        String getSMTPHost() {
+        public String getSMTPHost() {
             return smtpHost;
         }
 
-        String getIMAPHost() {
+        public String getIMAPHost() {
             return imapHost;
         }
 
-        int getSMTPPort() {
+        public int getSMTPPort() {
             return smtpPort;
         }
 
-        int getIMAPPort() {
+        public int getIMAPPort() {
             return imapPort;
         }
 
-        boolean isSMTPSSL() {
+        public boolean isSMTPSSL() {
             return smtpSSL;
         }
 
-        boolean isIMAPSSL() {
+        public boolean isIMAPSSL() {
             return imapSSL;
         }
     }

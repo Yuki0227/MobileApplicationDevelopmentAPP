@@ -11,9 +11,9 @@ import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.app.MyApplication;
 import com.app.R;
 import com.app.util.CommonUtils;
-import com.app.util.UserUtils;
 
 import org.json.JSONObject;
 
@@ -111,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                     id = jsonObj.getString("id");
                     name = jsonObj.getString("name");
 
-                    UserUtils.getInstance().setUser(Integer.parseInt(id), name, "");
+                    MyApplication.setUser(Integer.parseInt(id), name, "");
 
                     loginSucceed = true;
                 } catch (Exception e) {
@@ -122,10 +122,11 @@ public class LoginActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(finalLoginSucceed)
+                        if (finalLoginSucceed) {
                             CommonUtils.showDlgMsg(LoginActivity.this, "登录成功");
-                        else
+                        } else {
                             CommonUtils.showDlgMsg(LoginActivity.this, "用户名与密码不匹配或用户不存在！");
+                        }
                     }
                 });
             }

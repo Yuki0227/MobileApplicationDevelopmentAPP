@@ -11,12 +11,14 @@ import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.app.MainActivity;
 import com.app.MyApplication;
 import com.app.R;
 import com.app.util.CommonUtils;
 
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import okhttp3.FormBody;
@@ -24,7 +26,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements Serializable {
 
     private Button btn_login;
     private Button btn_register;
@@ -32,11 +34,15 @@ public class LoginActivity extends AppCompatActivity {
     private EditText et_password;
     private Handler mainHandler;
     private RelativeLayout relativeLayout;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        intent  = getIntent();
+        setResult(0,intent);
 
         initLayoutBind();
         initListener();
@@ -58,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 login();
             }
         });
@@ -114,6 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                     MyApplication.setUser(Integer.parseInt(id), name, "");
 
                     loginSucceed = true;
+
                 } catch (Exception e) {
                     e.printStackTrace();
 
@@ -124,6 +132,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void run() {
                         if (finalLoginSucceed) {
                             CommonUtils.showDlgMsg(LoginActivity.this, "登录成功");
+                            finish();
                         } else {
                             CommonUtils.showDlgMsg(LoginActivity.this, "用户名与密码不匹配或用户不存在！");
                         }

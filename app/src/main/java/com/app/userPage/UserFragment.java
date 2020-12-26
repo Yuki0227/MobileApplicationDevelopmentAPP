@@ -38,7 +38,7 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,1);
             }
         });
         return view;

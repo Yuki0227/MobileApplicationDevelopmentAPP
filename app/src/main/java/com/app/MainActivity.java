@@ -1,19 +1,26 @@
 package com.app;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.app.bbs.BBSFragment;
 import com.app.email.EmailFragment;
+import com.app.email.controls.Controls;
 import com.app.exercise.ExerciseFragment;
+import com.app.login.LoginActivity;
 import com.app.task.TaskFragment;
 import com.app.userPage.UserFragment;
+import com.app.userPage.UserOnlineFragment;
+import com.app.util.CommonUtils;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -29,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     BBSFragment bbsFragment;
     ExerciseFragment exerciseFragment;
     UserFragment userFragment;
+    UserOnlineFragment useronFragment;
     private FragmentManager mfragmentManger;
 
 
@@ -36,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.e("","Oncreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         taskLinear = findViewById(R.id.navigation_task);
@@ -105,11 +114,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.navigation_user:
                 setAllFalse();
                 userLinear.setSelected(true);
-                if (userFragment == null) {
-                    userFragment = new UserFragment("User");
-                    fragmentTransaction.add(R.id.fragment_frame, userFragment);
-                } else {
-                    fragmentTransaction.show(userFragment);
+                if(MyApplication.getUser()== null){
+                    if (userFragment == null) {
+                        userFragment = new UserFragment("User");
+                        fragmentTransaction.add(R.id.fragment_frame, userFragment);
+                    } else {
+                        fragmentTransaction.show(userFragment);
+                    }
+                }else {
+                    if (useronFragment == null) {
+                        useronFragment = new UserOnlineFragment(MyApplication.getUser().getName());
+                        fragmentTransaction.add(R.id.fragment_frame, useronFragment);
+                    } else {
+                        fragmentTransaction.show(useronFragment);
+                    }
                 }
                 break;
         }
@@ -132,6 +150,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (userFragment != null) {
             fragmentTransaction.hide(userFragment);
         }
+        if (useronFragment != null) {
+            fragmentTransaction.hide(useronFragment);
+        }
     }
 
     private void setAllFalse() {
@@ -142,5 +163,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         userLinear.setSelected(false);
     }
 
+
+
+    @Override
+    protected void onRestart() {
+
+        super.onRestart();
+        //模拟点击User
+        getWindow().getDecorView().setId(R.id.navigation_user);
+        onClick(getWindow().getDecorView());
+
+    }
 
 }

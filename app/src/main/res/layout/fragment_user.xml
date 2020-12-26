@@ -37,13 +37,22 @@
         android:id="@+id/btn_register"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="点击注册"
+        android:text="点击切换"
         android:textColor="@color/white"
 
         android:background="@drawable/ic_click_bt"
         android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/btn_login"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/imv_head"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"/>
 
 
 </RelativeLayout>

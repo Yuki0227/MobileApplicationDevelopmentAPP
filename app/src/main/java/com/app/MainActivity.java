@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
                 break;
         }
-        fragmentTransaction.commit();//记得必须要commit,否则没有效果
+        fragmentTransaction.commitAllowingStateLoss();//记得必须要commit,否则没有效果
     }
 
     private void hideAllFragment(FragmentTransaction fragmentTransaction) {
@@ -169,9 +169,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onRestart() {
 
         super.onRestart();
+        if(userLinear.isSelected()){
         //模拟点击User
         getWindow().getDecorView().setId(R.id.navigation_user);
-        onClick(getWindow().getDecorView());
+        onClick(getWindow().getDecorView());}
 
     }
 

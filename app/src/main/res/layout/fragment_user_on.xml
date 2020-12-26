@@ -1,16 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:orientation="vertical"
+    tools:context=".userPage.UserFragment"
+    android:background="@drawable/bg_userpage">
+    <!--工程-->
+    <ImageView
+        android:id="@+id/imv_head"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+
+        android:src="@drawable/uesr_head"
+
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/userpage_head"
+        />
 
     <TextView
         android:id="@+id/Text1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:textColor="#000"
         android:textSize="20sp"
-        android:text="rgrg"
-        android:gravity="center"/>
+        android:text="登录成功"
+        android:gravity="center"
+        android:layout_below="@+id/imv_head"/>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/imv_head"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#b0ffffff">
+
+
+
+        <TextView
+            android:id="@+id/Text2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textColor="#000"
+            android:textSize="20sp"
+            android:text="登录成功"
+            android:gravity="center"/>
+    </FrameLayout>
 </RelativeLayout>
+
+<!--    <Button-->
+<!--        android:id="@+id/btn_login"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="点击登录"-->
+<!--        android:textColor="@color/white"-->
+
+<!--        android:background="@drawable/ic_click_bt"-->
+
+<!--        android:layout_marginTop="60dp"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_below="@+id/imv_head"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/btn_register"-->
+<!--        android:layout_width="300dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="点击切换"-->
+<!--        android:textColor="@color/white"-->
+
+<!--        android:background="@drawable/ic_click_bt"-->
+<!--        android:layout_marginTop="40dp"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_below="@+id/btn_login"/>-->
+
+
+
+
+<!--<TextView-->
+<!--android:id="@+id/Text1"-->
+<!--android:layout_width="match_parent"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:textColor="#000"-->
+<!--android:textSize="20sp"-->
+<!--android:text="rgrg"-->
+<!--android:gravity="center"/>-->

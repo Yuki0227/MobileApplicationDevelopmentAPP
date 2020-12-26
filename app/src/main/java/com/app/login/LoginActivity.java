@@ -131,7 +131,7 @@ public class LoginActivity extends AppCompatActivity implements Serializable {
                     @Override
                     public void run() {
                         if (finalLoginSucceed) {
-                            CommonUtils.showDlgMsg(LoginActivity.this, "登录成功");
+                            //CommonUtils.showDlgMsg(LoginActivity.this, "登录成功");
                             finish();
                         } else {
                             CommonUtils.showDlgMsg(LoginActivity.this, "用户名与密码不匹配或用户不存在！");

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.app.R;
 import com.app.login.LoginActivity;
+import com.app.login.RegisterActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,7 +23,7 @@ public class UserFragment extends Fragment {
 
     private String fragmentText;
     private Button btn_login;
-
+    private Button btn_register;
     private TextView fragmentTextView;
 
     public UserFragment(String fragmentText) {
@@ -38,6 +39,15 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivityForResult(intent,1);
+            }
+        });
+
+        btn_register = view.findViewById(R.id.btn_register);
+        btn_register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), RegisterActivity.class);
                 startActivityForResult(intent,1);
             }
         });

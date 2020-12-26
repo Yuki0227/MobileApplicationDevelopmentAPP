@@ -13,14 +13,36 @@
         android:layout_height="100dp"
         android:scaleType="centerCrop"
 
-        android:src="@drawable/uesr_head"
+        android:src="@drawable/userhead_unonline"
 
         android:layout_marginTop="100dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/userpage_head"
         />
 
-    <Button
+    <TextView
+        android:id="@+id/Text1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:textColor="#000"
+        android:textSize="20sp"
+        android:text="未登录"
+        android:gravity="center"
+        android:layout_below="@+id/imv_head"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/imv_head"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="#b0ffffff">
+
+    </FrameLayout>
+        <Button
         android:id="@+id/btn_login"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
@@ -29,7 +51,7 @@
 
         android:background="@drawable/ic_click_bt"
 
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="60dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/imv_head"/>
 
@@ -37,22 +59,12 @@
         android:id="@+id/btn_register"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="点击切换"
+        android:text="点击注册"
         android:textColor="@color/white"
 
         android:background="@drawable/ic_click_bt"
         android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/btn_login"/>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/imv_head"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"/>
-
 
 </RelativeLayout>

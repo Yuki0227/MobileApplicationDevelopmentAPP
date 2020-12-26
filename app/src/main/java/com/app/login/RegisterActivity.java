@@ -86,8 +86,9 @@ public class RegisterActivity extends AppCompatActivity {
                         if (finalRegisterSucceed) {
                             CommonUtils.showLongMsg(RegisterActivity.this, "注册成功");
                             finish();
-                        } else
+                        } else {
                             CommonUtils.showDlgMsg(RegisterActivity.this, "注册失败！");
+                        }
                     }
                 });
             }

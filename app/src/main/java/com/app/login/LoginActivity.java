@@ -122,10 +122,11 @@ public class LoginActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(finalLoginSucceed)
+                        if (finalLoginSucceed) {
                             CommonUtils.showDlgMsg(LoginActivity.this, "登录成功");
-                        else
+                        } else {
                             CommonUtils.showDlgMsg(LoginActivity.this, "用户名与密码不匹配或用户不存在！");
+                        }
                     }
                 });
             }

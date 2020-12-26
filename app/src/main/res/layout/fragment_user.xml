@@ -4,19 +4,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".userPage.UserFragment">
+    tools:context=".userPage.UserFragment"
+    android:background="@drawable/bg_userpage">
+<!--工程-->
+    <ImageView
+        android:id="@+id/imv_head"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
 
+        android:src="@drawable/uesr_head"
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="点击注册" />
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/userpage_head"
+        />
 
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="点击登录" />
+        android:text="点击登录"
+        android:textColor="@color/white"
+
+        android:background="@drawable/ic_click_bt"
+
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/imv_head"/>
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="点击注册"
+        android:textColor="@color/white"
+
+        android:background="@drawable/ic_click_bt"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/btn_login"/>
 
 
 </RelativeLayout>

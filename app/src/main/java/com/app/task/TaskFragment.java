@@ -1,9 +1,13 @@
 package com.app.task;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Looper;
+import android.os.MessageQueue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -13,8 +17,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import com.app.MyApplication;
 import com.app.R;
 
 import java.util.ArrayList;
@@ -36,6 +42,14 @@ public class TaskFragment extends Fragment {
     private ListView listView;
     //private List<Map<String, String>> list = null;
     private TaskListViewAdapter taskListViewAdapter;
+    private Toolbar task_toolbar;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //让fragment有菜单
+        setHasOptionsMenu(true);
+    }
 
     @Nullable
     @Override
@@ -44,6 +58,26 @@ public class TaskFragment extends Fragment {
 
         listView = view.findViewById(R.id.task_item);
         taskListViewAdapter = new TaskListViewAdapter(getContext());
+        task_toolbar = view.findViewById(R.id.task_toolbar);
+        task_toolbar.inflateMenu(R.menu.menu_add_task);
+
+        task_toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.menu_task_add:
+                        Toast.makeText(getContext(),"click",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(),TaskAddActivity.class);
+                        startActivity(intent);
+                        /*
+                        Intent intent= new Intent(getActivity(),Web_Activity.class);
+                    startActivity(intent);
+                         */
+                        break;
+                }
+                return false;
+            }
+        });
 
         /*
         list = new ArrayList<Map<String, String>>();
@@ -71,7 +105,6 @@ public class TaskFragment extends Fragment {
                         System.out.println("iv_delete --> ");
                         listView.setAdapter(taskListViewAdapter);
                         break;
-
                 }
             }
         });
@@ -91,6 +124,7 @@ public class TaskFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_add_task,menu);
     }
 

@@ -4,6 +4,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.widget.Toast;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class CommonUtils {
 
     /**
@@ -36,5 +40,25 @@ public class CommonUtils {
                 .setMessage(msg)
                 .setPositiveButton("确定",null)
                 .create().show();
+    }
+
+    /**
+     * 将日期字符串转换成日期
+     * @param dateString 要转化的日期字符串
+     * @return  转化后的日期
+     */
+    public static Date StringToDate(String dateString){
+        if(dateString == null) return null;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date d = null;
+        Date date = null;
+        try {
+            d = format.parse(dateString);
+            date = new Date(d.getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return date;
     }
 }

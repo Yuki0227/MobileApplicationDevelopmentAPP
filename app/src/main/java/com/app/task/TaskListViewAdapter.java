@@ -7,17 +7,36 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.app.MyApplication;
 import com.app.R;
+import com.app.task.entity.TaskAssign;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+
+import java.util.List;
 
 import okhttp3.internal.concurrent.Task;
 
 public class TaskListViewAdapter extends BaseAdapter {
 
     private Context context = null;
+    private OnItemClickListener mOnItemClickListener;
 
     public TaskListViewAdapter(Context context) {
         this.context = context;
+    }
+
+    public interface OnItemClickListener{
+        //子条目单击事件
+        void onItemClick(View view, int position);
+    }
+
+    //回调方法 将接口传递进来
+    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener)
+    {
+        this.mOnItemClickListener = mOnItemClickListener;
+
     }
 
     @Override
@@ -42,7 +61,7 @@ public class TaskListViewAdapter extends BaseAdapter {
         if(convertView == null){
             mHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(context);
-            convertView = inflater.inflate(R.layout.fragment_task, null, true);
+            convertView = inflater.inflate(R.layout.task_list, parent, false);
             mHolder.iv_done = convertView.findViewById(R.id.iv_done);
             mHolder.iv_delete = convertView.findViewById(R.id.iv_delete);
             mHolder.tv_content = convertView.findViewById(R.id.tv_content);
@@ -56,7 +75,57 @@ public class TaskListViewAdapter extends BaseAdapter {
         String title = TaskFactory.getTask().get(position).get("username").toString();
         String content = TaskFactory.getTask().get(position).get("password").toString();
         mHolder.tv_title.setText(title);
-        //mHolder.tv_content.setText(content);
+        mHolder.tv_content.setText(content);
+
+        if(MyApplication.getUser() != null){
+            List<TaskAssign> task = TaskFactory.getTask(MyApplication.getUser().getId());
+            System.out.println("你已经登录了,你的任务是");
+            System.out.println(task);
+        }else{
+            Toast.makeText(context, "你还未登录", Toast.LENGTH_SHORT).show();
+        }
+
+
+        if(mOnItemClickListener != null){
+            mHolder.iv_done.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, "iv_done" + position, Toast.LENGTH_SHORT).show();
+                    mHolder.iv_done.setImageResource(R.mipmap.ic_task_complete);
+                    mOnItemClickListener.onItemClick(mHolder.iv_done,position);
+                }
+            });
+
+            mHolder.iv_delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    TaskFactory.getTask().remove(position);
+                    Toast.makeText(context, "iv_delete" + position, Toast.LENGTH_SHORT).show();
+                    mOnItemClickListener.onItemClick(mHolder.iv_delete,position);
+                }
+            });
+        }
+
+        /*
+        mHolder.iv_done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "iv_done" + position, Toast.LENGTH_SHORT).show();
+                mHolder.iv_done.setImageResource(R.mipmap.ic_task_complete);
+            }
+        });
+
+        mHolder.iv_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TaskFactory.getTask().remove(position);
+                Toast.makeText(context, "iv_delete" + position, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+         */
+
         return convertView;
     }
 

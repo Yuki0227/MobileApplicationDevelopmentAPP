@@ -61,4 +61,16 @@ public class TaskAssign {
     public void setTaskFinishTime(Date taskFinishTime) {
         this.taskFinishTime = taskFinishTime;
     }
+
+    @Override
+    public String toString() {
+        return "TaskAssign{" +
+                "id=" + id +
+                ", creatorId=" + creatorId +
+                ", assigneeId=" + assigneeId +
+                ", task='" + task + '\'' +
+                ", taskCreateTime=" + taskCreateTime +
+                ", taskFinishTime=" + taskFinishTime +
+                '}';
+    }
 }

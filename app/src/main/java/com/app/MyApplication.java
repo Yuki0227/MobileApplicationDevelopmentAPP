@@ -5,11 +5,14 @@ import android.app.Application;
 import android.content.Context;
 import android.os.StrictMode;
 
+import com.app.task.entity.TaskAssign;
 import com.app.util.User;
 import com.smailnet.emailkit.EmailKit;
 import com.smailnet.microkv.MicroKV;
 
 import org.litepal.LitePal;
+
+import java.util.List;
 
 public class MyApplication extends Application {
 
@@ -17,6 +20,7 @@ public class MyApplication extends Application {
     private static Context context;
     private static EmailKit.Config config;
     private static User user;
+    private static List<TaskAssign> taskList;
 
     @Override
     public void onCreate() {
@@ -25,6 +29,7 @@ public class MyApplication extends Application {
         MicroKV.initialize(this);
         LitePal.initialize(this);
         user = null;
+        taskList = null;
         context = getApplicationContext();
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
@@ -72,5 +77,17 @@ public class MyApplication extends Application {
 
     public static void setUser(int id, String name, String password) {
         MyApplication.user = new User(id, name, password);
+    }
+
+    public static void setContext(Context context) {
+        MyApplication.context = context;
+    }
+
+    public static List<TaskAssign> getTaskList() {
+        return taskList;
+    }
+
+    public static void setTaskList(List<TaskAssign> taskList) {
+        MyApplication.taskList = taskList;
     }
 }

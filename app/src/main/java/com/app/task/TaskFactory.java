@@ -12,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -41,6 +42,33 @@ public class TaskFactory {
     }
 
 
+    //根据任务的id来删除对应的任务
+    public static void deleteTask(Integer taskId){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    FormBody.Builder params = new FormBody.Builder();
+                    params.add("id",taskId+"");
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder()
+                            .url("http://8.131.250.250/taskAssign/delete")
+                            .post(params.build())
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    if(response.isSuccessful()){
+                        Log.d("response --> ", response.toString());
+                    }else{
+                        Log.d("note --> ", "删除失败");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+
     //根据用户id来获得其所拥有的任务
     public static List<TaskAssign> getTask(Integer userId){
 
@@ -63,7 +91,7 @@ public class TaskFactory {
                     //将json转成TaskAssign对象
                     //JSONArray jsonArray = jsonObj.optJSONArray("jsonArray");
                     List<TaskAssign> tmp = new ArrayList<TaskAssign>();
-                    System.out.println("jsonArray --> " + jsonArray);
+                 //   System.out.println("jsonArray --> " + jsonArray);
                     if(jsonArray != null && jsonArray.length() > 0){
                         for(int i = 0; i < jsonArray.length(); i++){
                             JSONObject ans = jsonArray.getJSONObject(i);
@@ -74,10 +102,17 @@ public class TaskFactory {
                             taskAssign.setTask(ans.optString("task"));
                             String taskCreateTime = ans.optString("taskCreateTime");
                             String taskFinishTime = ans.optString("taskFinishTime");
-                            if(taskCreateTime != null || taskCreateTime.length() > 0)
-                                taskAssign.setTaskCreateTime(CommonUtils.StringToDate(taskCreateTime));
-                            if(taskFinishTime != null || taskCreateTime.length() > 0)
-                                taskAssign.setTaskFinishTime(CommonUtils.StringToDate(taskFinishTime));
+                            if(taskCreateTime != null && taskCreateTime.length() > 0){
+                                Date createTime = CommonUtils.StringToDate(taskCreateTime);
+                                taskAssign.setTaskCreateTime(createTime);
+                            }
+
+                            if(taskFinishTime != null && taskCreateTime.length() > 0){
+                                Date finishTime = CommonUtils.StringToDate(taskFinishTime);
+                                if(finishTime != null)
+                                    taskAssign.setTaskFinishTime(finishTime);
+                            }
+
                             //System.out.println("i --> " + i);
                             //System.out.println("taskAssign --> (only part)" + taskAssign);
                             //System.out.println("taskCreateTime --> " + taskCreateTime);
@@ -85,10 +120,13 @@ public class TaskFactory {
                             tmp.add(taskAssign);
                         }
                         MyApplication.setTaskList(tmp);
+                    }else{
+                        MyApplication.setTaskList(null);
                     }
 
                 } catch (Exception e) {
                     e.printStackTrace();
+                    MyApplication.setTaskList(null);
                 }
             }
         }).start();

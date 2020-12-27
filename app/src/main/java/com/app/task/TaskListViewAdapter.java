@@ -42,12 +42,25 @@ public class TaskListViewAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         //根据对象的个数进行返回其值
-        return TaskFactory.getTask().size();
+        if(MyApplication.getUser() != null){
+            if(TaskFactory.getTask(MyApplication.getUser().getId()) != null)
+                return TaskFactory.getTask(MyApplication.getUser().getId()).size();
+        }
+        return 0;
+        //return TaskFactory.getTask().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return TaskFactory.getTask().get(position);
+        if(MyApplication.getUser() != null){
+            if(TaskFactory.getTask(MyApplication.getUser().getId()) != null ){
+                if(TaskFactory.getTask(MyApplication.getUser().getId()).size() > 0){
+                    return TaskFactory.getTask(MyApplication.getUser().getId()).get(position);
+                }
+            }
+        }
+        return null;
+        //return TaskFactory.getTask().get(position);
     }
 
     @Override
@@ -71,7 +84,18 @@ public class TaskListViewAdapter extends BaseAdapter {
             mHolder = (ViewHolder) convertView.getTag();
         }
 
-        //下面这块代码仅做测试用,具体如何写根据实际需求来
+
+        if(MyApplication.getUser() != null){
+            List<TaskAssign> taskAssignList = TaskFactory.getTask(MyApplication.getUser().getId());
+            if(taskAssignList != null || taskAssignList.size() > 0){
+                String task = taskAssignList.get(position).getTask();
+                mHolder.tv_title.setText(task);
+                mHolder.tv_content.setText("content->" + task);
+            }
+        }
+
+
+        /*下面这块代码仅做测试用,具体如何写根据实际需求来
         String title = TaskFactory.getTask().get(position).get("username").toString();
         String content = TaskFactory.getTask().get(position).get("password").toString();
         mHolder.tv_title.setText(title);
@@ -80,10 +104,12 @@ public class TaskListViewAdapter extends BaseAdapter {
         if(MyApplication.getUser() != null){
             List<TaskAssign> task = TaskFactory.getTask(MyApplication.getUser().getId());
             System.out.println("你已经登录了,你的任务是");
-            System.out.println(task);
+            //System.out.println(task);
         }else{
             Toast.makeText(context, "你还未登录", Toast.LENGTH_SHORT).show();
         }
+
+         */
 
 
         if(mOnItemClickListener != null){
@@ -99,8 +125,12 @@ public class TaskListViewAdapter extends BaseAdapter {
             mHolder.iv_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-                    TaskFactory.getTask().remove(position);
+                    Integer taskId = TaskFactory.getTask(MyApplication.getUser().getId()).get(position).getId();
+                    TaskFactory.getTask(MyApplication.getUser().getId()).remove(position);
+                    TaskFactory.deleteTask(taskId);
+                    //删除后更新任务集合
+                    TaskFactory.getTask(MyApplication.getUser().getId());
+                    //TaskFactory.getTask().remove(position);
                     Toast.makeText(context, "iv_delete" + position, Toast.LENGTH_SHORT).show();
                     mOnItemClickListener.onItemClick(mHolder.iv_delete,position);
                 }

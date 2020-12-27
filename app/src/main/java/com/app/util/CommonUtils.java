@@ -54,11 +54,14 @@ public class CommonUtils {
         Date date = null;
         try {
             d = format.parse(dateString);
-            date = new Date(d.getTime());
+            if(d != null){
+                date = new Date(d.getTime());
+            }else{
+                return null;
+            }
         } catch (ParseException e) {
-            e.printStackTrace();
+           // e.printStackTrace();
         }
-
         return date;
     }
 }

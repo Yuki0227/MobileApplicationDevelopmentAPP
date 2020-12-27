@@ -17,6 +17,8 @@ import com.app.email.EmailFragment;
 import com.app.email.controls.Controls;
 import com.app.exercise.ExerciseFragment;
 import com.app.login.LoginActivity;
+import com.app.task.TaskAddActivity;
+import com.app.task.TaskFactory;
 import com.app.task.TaskFragment;
 import com.app.userPage.UserFragment;
 import com.app.userPage.UserOnlineFragment;
@@ -60,7 +62,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mfragmentManger = getSupportFragmentManager();
         taskLinear.performClick();
 
-
+        //获得所有用户(预处理)
+        TaskAddActivity.getAllUsers();
     }
 
     @SuppressLint("NonConstantResourceId")

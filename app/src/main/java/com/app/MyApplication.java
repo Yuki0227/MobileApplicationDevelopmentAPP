@@ -21,6 +21,8 @@ public class MyApplication extends Application {
     private static EmailKit.Config config;
     private static User user;
     private static List<TaskAssign> taskList;
+    //数据库中的所有用户
+    private static List<User> allUsers;
 
     @Override
     public void onCreate() {
@@ -29,6 +31,7 @@ public class MyApplication extends Application {
         MicroKV.initialize(this);
         LitePal.initialize(this);
         user = null;
+        allUsers = null;
         taskList = null;
         context = getApplicationContext();
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
@@ -89,5 +92,13 @@ public class MyApplication extends Application {
 
     public static void setTaskList(List<TaskAssign> taskList) {
         MyApplication.taskList = taskList;
+    }
+
+    public static List<User> getAllUsers() {
+        return allUsers;
+    }
+
+    public static void setAllUsers(List<User> allUsers) {
+        MyApplication.allUsers = allUsers;
     }
 }

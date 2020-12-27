@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="#F0F8FF">
 
     <include layout="@layout/email_title_bar" />
 
@@ -135,7 +135,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
-                tools:ignore="WebViewLayout" />
+                tools:ignore="WebViewLayout"
+                android:layout_marginTop="20dp"/>
 
             <ProgressBar
                 android:id="@+id/email_activity_watch_progress_bar"
@@ -147,6 +148,9 @@
                 android:id="@+id/email_activity_watch_attachment_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/ic_edt"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginStart="20dp"

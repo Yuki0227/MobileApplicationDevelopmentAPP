@@ -32,9 +32,11 @@
         android:layout_below="@+id/imv_head"/>
 
     <FrameLayout
+        android:id="@+id/fu_fly"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/imv_head"
+
         android:layout_marginTop="50dp"
         android:layout_marginBottom="40dp"
         android:layout_marginLeft="20dp"
@@ -52,7 +54,23 @@
             android:textSize="20sp"
             android:text="登录成功"
             android:gravity="center"/>
+
+        <Button
+            android:id="@+id/btn_exit"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="退出登录"
+            android:textColor="@color/white"
+
+            android:layout_gravity="center"
+
+            android:background="@drawable/ic_click_bt"
+            android:layout_marginTop="100dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/fu_fly"/>
     </FrameLayout>
+
+
 </RelativeLayout>
 
 <!--    <Button-->

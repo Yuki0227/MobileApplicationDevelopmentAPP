@@ -4,7 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="24dp">
+    android:paddingTop="24dp"
+    android:background="#F0F8FF">
 
     <include layout="@layout/email_title_bar" />
 
@@ -12,7 +13,9 @@
         android:id="@+id/email_activity_settings_db_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_click_bt"
+        android:textColor="@color/white"
+        android:layout_marginTop="30dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:text="清除缓存的消息数据"
@@ -22,7 +25,9 @@
         android:id="@+id/email_activity_settings_sp_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_click_bt"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:text="清除缓存的文件夹名称数据"
@@ -32,7 +37,9 @@
         android:id="@+id/email_activity_settings_logout_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_click_bt"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:text="退出帐号"

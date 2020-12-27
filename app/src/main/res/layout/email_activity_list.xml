@@ -24,7 +24,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/email_activity_list_msg_rv"
-            android:background="@drawable/bg_edittext"
+            android:background="@drawable/ic_edt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="8dp"

@@ -25,7 +25,7 @@
             android:ellipsize="end"
             android:text="阿里云"
             android:textSize="16sp"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/black"
             tools:ignore="HardcodedText" />
 
         <TextView

@@ -1,15 +1,22 @@
 package com.app.task;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Looper;
 import android.os.MessageQueue;
+import android.text.style.URLSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -22,6 +29,7 @@ import androidx.fragment.app.Fragment;
 
 import com.app.MyApplication;
 import com.app.R;
+import com.app.task.entity.TaskAssign;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,10 +44,10 @@ import java.util.Map;
 public class TaskFragment extends Fragment {
 
     private String fragmentText;
-
     private TextView fragmentTextView;
-
     private ListView listView;
+    private EditText et_title;
+    private EditText et_content;
     //private List<Map<String, String>> list = null;
     private TaskListViewAdapter taskListViewAdapter;
     private Toolbar task_toolbar;
@@ -60,6 +68,8 @@ public class TaskFragment extends Fragment {
         taskListViewAdapter = new TaskListViewAdapter(getContext());
         task_toolbar = view.findViewById(R.id.task_toolbar);
         task_toolbar.inflateMenu(R.menu.menu_add_task);
+        et_title = view.findViewById(R.id.et_title);
+        et_content = view.findViewById(R.id.et_content);
 
         task_toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
@@ -106,6 +116,26 @@ public class TaskFragment extends Fragment {
                         listView.setAdapter(taskListViewAdapter);
                         break;
                 }
+            }
+        });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getContext(),"长按" + position,Toast.LENGTH_SHORT).show();
+                Adapter adapter = parent.getAdapter();
+                String s = adapter.getItem(position).toString();
+                String[] s1 = s.split("'");
+                String task = s1[1];
+                String[] s2 = task.split(":");
+                String title = s2[0];
+                String content = s2[1];
+                Intent intent = new Intent(getActivity(),TaskUpdateActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("task_title",title);
+                bundle.putString("task_content",content);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                return true;
             }
         });
 

@@ -8,6 +8,6 @@
     <string name="add_todo_title_hint">请输入待办清单标题</string>
     <string name="add_todo_content_hint">请输入待办清单内容（非必填）</string>
     <string name="add_todo_submit">添加</string>
-
+    <string name="add_todo_update">更新</string>
 
 </resources>

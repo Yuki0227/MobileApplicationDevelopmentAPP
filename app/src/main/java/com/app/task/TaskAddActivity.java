@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +37,9 @@ public class TaskAddActivity extends AppCompatActivity {
 
     private Spinner spinner;
     private TextView task_assign_username;
+    private TextView btn_task_add;
+    private EditText task_title;
+    private EditText task_content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +49,15 @@ public class TaskAddActivity extends AppCompatActivity {
         //初始化控件
         spinner = findViewById(R.id.task_assign_spinner);
         task_assign_username = findViewById(R.id.task_assign_username);
+        btn_task_add = findViewById(R.id.btn_task_add);
+        task_title = findViewById(R.id.task_title);
+        task_content = findViewById(R.id.task_content);
         //获得数据源
         List<User> userList = getAllUsers();
         if(userList != null){
             UserListAdapter userListAdapter = new UserListAdapter(userList,this);
             spinner.setAdapter(userListAdapter);
+            //为spinner绑定选中监听器
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -62,6 +70,15 @@ public class TaskAddActivity extends AppCompatActivity {
                 }
             });
         }
+
+        //为提交按钮绑定监听事件
+        btn_task_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
 
     }
 

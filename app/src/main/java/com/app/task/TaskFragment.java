@@ -46,8 +46,6 @@ public class TaskFragment extends Fragment {
     private String fragmentText;
     private TextView fragmentTextView;
     private ListView listView;
-    private EditText et_title;
-    private EditText et_content;
     //private List<Map<String, String>> list = null;
     private TaskListViewAdapter taskListViewAdapter;
     private Toolbar task_toolbar;
@@ -68,8 +66,6 @@ public class TaskFragment extends Fragment {
         taskListViewAdapter = new TaskListViewAdapter(getContext());
         task_toolbar = view.findViewById(R.id.task_toolbar);
         task_toolbar.inflateMenu(R.menu.menu_add_task);
-        et_title = view.findViewById(R.id.et_title);
-        et_content = view.findViewById(R.id.et_content);
 
         task_toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override

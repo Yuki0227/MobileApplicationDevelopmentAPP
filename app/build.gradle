@@ -44,6 +44,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    // https://mvnrepository.com/artifact/com.alibaba/fastjson
+    implementation group: 'com.alibaba', name: 'fastjson', version: '1.2.62'
 
     //EmailKit
     implementation project(path: ':EmalKit-library')

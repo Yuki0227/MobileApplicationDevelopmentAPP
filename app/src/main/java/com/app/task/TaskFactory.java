@@ -3,6 +3,7 @@ package com.app.task;
 import android.util.JsonToken;
 import android.util.Log;
 
+import com.alibaba.fastjson.JSON;
 import com.app.MyApplication;
 import com.app.task.entity.TaskAssign;
 import com.app.util.CommonUtils;
@@ -62,6 +63,35 @@ public class TaskFactory {
                         Log.d("note --> ", "删除失败");
                     }
                 } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    //添加任务
+    public static void addTask(TaskAssign taskAssign){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                OkHttpClient client = new OkHttpClient();
+                String json = com.alibaba.fastjson.JSON.toJSONString(taskAssign);
+                Log.d("json --> ",json);
+                RequestBody body = RequestBody.create(JSON, json);
+                Request request = new Request.Builder()
+                        .url("http://8.131.250.250/taskAssign/add")
+                        .post(body)
+                        .build();
+                try {
+                    Response response = client.newCall(request).execute();
+                    if(response.isSuccessful()){
+                        Log.d("response --> ", response.body().string());
+                    }else{
+                        Log.d("note --> ", "添加失败");
+                        throw new IOException("Unexpected code " + response);
+                    }
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }

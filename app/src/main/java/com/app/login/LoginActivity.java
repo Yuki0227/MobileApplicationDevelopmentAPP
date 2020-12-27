@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.app.MainActivity;
 import com.app.MyApplication;
 import com.app.R;
+import com.app.task.TaskFactory;
 import com.app.util.CommonUtils;
 
 import org.json.JSONObject;
@@ -121,6 +122,9 @@ public class LoginActivity extends AppCompatActivity implements Serializable {
                     MyApplication.setUser(Integer.parseInt(id), name, "");
 
                     loginSucceed = true;
+
+                    //用户登录成功,就根据其id预处理任务列表
+                    TaskFactory.getTask(Integer.parseInt(id));
 
                 } catch (Exception e) {
                     e.printStackTrace();

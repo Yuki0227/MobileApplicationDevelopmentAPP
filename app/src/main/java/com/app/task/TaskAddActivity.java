@@ -18,11 +18,15 @@ import android.widget.Toast;
 
 import com.app.MyApplication;
 import com.app.R;
+import com.app.login.RegisterActivity;
+import com.app.task.entity.TaskAssign;
+import com.app.util.CommonUtils;
 import com.app.util.User;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -75,7 +79,30 @@ public class TaskAddActivity extends AppCompatActivity {
         btn_task_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(task_title.getText() == null || task_title.getText().toString().isEmpty() || task_assign_username.getText().toString().isEmpty()){
+                    CommonUtils.showShortMsg(v.getContext(),"修改失败,未填写任务标题或未指派人员");
+                }else{
+                    TaskAssign taskAssign = new TaskAssign();
+                    taskAssign.setCreatorId(MyApplication.getUser().getId());
+                    taskAssign.setTask(task_title.getText().toString());
+                    List<User> allUsers = MyApplication.getAllUsers();
+                    for(int i = 0; i < allUsers.size(); i++){
+                        if(allUsers.get(i).getName().equals(task_assign_username.getText().toString())){
+                            taskAssign.setAssigneeId(allUsers.get(i).getId());
+                            break;
+                        }
+                    }
+                    //taskAssign.setTaskCreateTime(new Date(System.currentTimeMillis()));
+                    TaskFactory.addTask(taskAssign);
 
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            CommonUtils.showShortMsg(v.getContext(),"添加成功");
+                            finish();
+                        }
+                    });
+                }
             }
         });
 

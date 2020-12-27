@@ -67,7 +67,6 @@
                 android:id="@+id/task_assign_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="张三"
                 android:textSize="16sp"/>
         </LinearLayout>
         <Spinner

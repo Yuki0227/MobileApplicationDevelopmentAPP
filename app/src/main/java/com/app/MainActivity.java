@@ -175,5 +175,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         onClick(getWindow().getDecorView());}
 
     }
+    public void finish(){
+        super.finish();
+        MyApplication.setUser(null);
+        userFragment=null;
+        useronFragment = null;
+    }
 
 }

@@ -98,10 +98,40 @@ public class TaskFactory {
         }).start();
     }
 
+    //修改任务
+    public static void updateTask(TaskAssign taskAssign){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                OkHttpClient client = new OkHttpClient();
+                String json = com.alibaba.fastjson.JSON.toJSONString(taskAssign);
+                Log.d("json --> ", json);
+                RequestBody body = RequestBody.create(JSON, json);
+                Request request = new Request.Builder()
+                        .url("http://8.131.250.250/taskAssign/update")
+                        .post(body)
+                        .build();
+                try{
+                    Response response = client.newCall(request).execute();
+                    if(response.isSuccessful()){
+                        Log.d("response --> ", response.body().string());
+                    }else{
+                        Log.d("note --> ", "修改失败");
+                        throw new IOException("Unexpected code " + response);
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                //更新任务列表
+                getTask(MyApplication.getUser().getId());
+            }
+        }).start();
+    }
+
 
     //根据用户id来获得其所拥有的任务
     public static List<TaskAssign> getTask(Integer userId){
-
         new Thread(new Runnable() {
             @Override
             public void run() {

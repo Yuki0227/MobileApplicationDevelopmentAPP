@@ -36,7 +36,6 @@ public class TaskListViewAdapter extends BaseAdapter {
     public void setOnItemClickListener(OnItemClickListener mOnItemClickListener)
     {
         this.mOnItemClickListener = mOnItemClickListener;
-
     }
 
     @Override
@@ -118,6 +117,9 @@ public class TaskListViewAdapter extends BaseAdapter {
                 public void onClick(View v) {
                     Toast.makeText(context, "iv_done" + position, Toast.LENGTH_SHORT).show();
                     mHolder.iv_done.setImageResource(R.mipmap.ic_task_complete);
+                    TaskAssign taskAssign = MyApplication.getTaskList().get(position);
+                    taskAssign.setStatus(1);        //将它的状态设为1,表示该任务已经完成
+                    TaskFactory.updateTask(taskAssign); //调用方法去更新该任务
                     mOnItemClickListener.onItemClick(mHolder.iv_done,position);
                 }
             });

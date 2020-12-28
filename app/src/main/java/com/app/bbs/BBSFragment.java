@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +22,7 @@ import com.app.bbs.Activity.ReleaseActivity;
 import com.app.bbs.Adapter.RecyclerViewAdapter;
 import com.app.bbs.Bean.ItemBean;
 import com.app.bbs.entity.Article;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,7 @@ public class BBSFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
+    FloatingActionButton floatingActionButton;
 
     public BBSFragment(String fragmentText) {
         this.fragmentText = fragmentText;

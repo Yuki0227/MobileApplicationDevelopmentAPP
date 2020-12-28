@@ -84,7 +84,7 @@ public class TaskAddActivity extends AppCompatActivity {
                 }else{
                     TaskAssign taskAssign = new TaskAssign();
                     taskAssign.setCreatorId(MyApplication.getUser().getId());
-                    taskAssign.setTask(task_title.getText().toString());
+                    taskAssign.setTaskTitle(task_title.getText().toString());
                     List<User> allUsers = MyApplication.getAllUsers();
                     for(int i = 0; i < allUsers.size(); i++){
                         if(allUsers.get(i).getName().equals(task_assign_username.getText().toString())){

@@ -88,9 +88,9 @@ public class TaskListViewAdapter extends BaseAdapter {
         if(MyApplication.getUser() != null){
             List<TaskAssign> taskAssignList = TaskFactory.getTask(MyApplication.getUser().getId());
             if(taskAssignList != null || taskAssignList.size() > 0){
-                String task = taskAssignList.get(position).getTask();
-                mHolder.tv_title.setText(task);
-                mHolder.tv_content.setText("content->" + task);
+                String task_title = taskAssignList.get(position).getTaskTitle();
+                mHolder.tv_title.setText(task_title);
+                mHolder.tv_content.setText("content->" + task_title);
             }
         }
 
@@ -162,7 +162,7 @@ public class TaskListViewAdapter extends BaseAdapter {
     class ViewHolder{
         private ImageView iv_done;
         private ImageView iv_delete;
-        private TextView tv_title;
-        private TextView tv_content;
+        private TextView tv_title;          //用于显示任务的标题
+        private TextView tv_content;        //用于显示任务的内容
     }
 }

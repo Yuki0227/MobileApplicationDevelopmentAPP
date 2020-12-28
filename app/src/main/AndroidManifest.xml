@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".task.TaskUpdateActivity"></activity>
+        <activity android:name=".task.TaskUpdateActivity"/>
+        <activity android:name=".bbs.Activity.ItemShowActivity"/>
         <activity android:name=".task.TaskAddActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

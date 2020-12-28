@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.fastjson.JSON;
 import com.app.R;
 import com.app.bbs.Activity.ItemShowActivity;
+import com.app.bbs.Activity.ReleaseActivity;
 import com.app.bbs.Adapter.RecyclerViewAdapter;
 import com.app.bbs.Bean.ItemBean;
 import com.app.bbs.entity.Article;
@@ -40,7 +41,7 @@ public class BBSFragment extends Fragment {
     private String fragmentText;
 
     private TextView fragmentTextView;
-    private Button mBtnFaTie;
+    private Button mBtnRelease;
     private LinearLayout mLayIine;
     private Article release;
 
@@ -64,24 +65,15 @@ public class BBSFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_bbs, container, false);
         init(view);
 
-        mBtnFaTie=view.findViewById(R.id.btn_item_ly_fatie);
-        mBtnFaTie.setOnClickListener(new View.OnClickListener() {
+        mBtnRelease=view.findViewById(R.id.btn_release);
+
+        mBtnRelease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                release_title=view.findViewById(R.id.edt_relese_title);
-//                release_content=view.findViewById(R.id.edt_relese_content);
-//                release= new Article(release_title.getText().toString(), release_content.getText().toString());
-//                itemList.add(release);
-//                init(view);
-//                release_title.setText("");
-//                release_content.setText("");
-//                Toast.makeText(getContext(),"发布成功",Toast.LENGTH_LONG).show();
+                Intent intent=new Intent(getActivity(), ReleaseActivity.class);
+                startActivity(intent);
             }
         });
-
-
-
-
         return view;
     }
 

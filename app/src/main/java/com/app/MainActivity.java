@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         taskLinear.performClick();
 
         //获得所有用户(预处理)
-        TaskAddActivity.getAllUsers();
+        TaskFactory.getAllUsers();
     }
 
     @SuppressLint("NonConstantResourceId")

@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSON;
 import com.app.MyApplication;
 import com.app.task.entity.TaskAssign;
 import com.app.util.CommonUtils;
+import com.app.util.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -192,5 +193,44 @@ public class TaskFactory {
             }
         }).start();
         return MyApplication.getTaskList();
+    }
+
+    //获得数据库中用户表中的所有用户
+    public static List<User> getAllUsers() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    OkHttpClient client = new OkHttpClient();
+                    FormBody.Builder params = new FormBody.Builder();
+                    Request request = new Request.Builder()
+                            .url("http://8.131.250.250/user/findAll")
+                            .post(params.build())
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responseData = Objects.requireNonNull(response.body()).string();
+                    //打印日志
+                    Log.d("responseData", responseData);
+                    JSONArray jsonArray = new JSONArray(responseData);
+                    List<User> tmp = new ArrayList<User>();
+                    if(jsonArray != null && jsonArray.length() > 0){
+                        for(int i = 0; i < jsonArray.length(); i++){
+                            JSONObject ans = jsonArray.getJSONObject(i);
+                            User user = new User();
+                            user.setId(ans.optInt("id"));
+                            user.setName(ans.optString("name"));
+                            user.setPassword(ans.optString("password"));
+                            //System.out.println(user);
+                            tmp.add(user);
+                        }
+                        MyApplication.setAllUsers(tmp);
+                    }
+
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        return MyApplication.getAllUsers();
     }
 }

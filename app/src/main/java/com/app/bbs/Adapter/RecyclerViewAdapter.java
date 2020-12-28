@@ -4,25 +4,22 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.app.R;
-import com.app.bbs.Bean.ItemBean;
+import com.app.bbs.entity.Article;
 
-import java.text.BreakIterator;
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private List<ItemBean> itemList;
+    private List<Article> itemList;
     private OnItemClickListener onItemClickListener = null;
 
-    public RecyclerViewAdapter(List<ItemBean> itemList, Context context) {
+    public RecyclerViewAdapter(List<Article> itemList, Context context) {
         this.itemList = itemList;
     }
 
@@ -35,9 +32,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerViewAdapter.ViewHolder holder, final int position) {
-        ItemBean item = itemList.get(position);
+        Article item = itemList.get(position);
         holder.itemName.setText(item.getTitle());
-        holder.itemLabels.setText(item.getContent());
+        holder.itemLabels.setText(item.getBody());
 
 
         if(null != onItemClickListener){

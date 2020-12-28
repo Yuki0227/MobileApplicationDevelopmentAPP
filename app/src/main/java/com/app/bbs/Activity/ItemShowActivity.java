@@ -1,82 +1,111 @@
 package com.app.bbs.Activity;
 
-import androidx.annotation.Nullable;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-
+import com.alibaba.fastjson.JSON;
+import com.app.MyApplication;
 import com.app.R;
 import com.app.bbs.Adapter.DiscussAdapter;
-import com.app.bbs.Bean.DiscussBean;
-import com.app.bbs.Bean.ItemBean;
+import com.app.bbs.entity.Article;
+import com.app.bbs.entity.ArticleReview;
 
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
+
+import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class ItemShowActivity extends AppCompatActivity {
 
-    private ItemBean item;
-    private DiscussBean discuss;
     private DiscussAdapter discussAdapter;
     private RecyclerView recyclerView;
     private EditText discusscontent;
+    private long articleId;
+    Article article;
+    List<ArticleReview> articleReviews;
 
-    TextView title,content;
-    List<List<DiscussBean>> dis=new ArrayList<>();
+    TextView title, content;
 
     private Button mBtnDiscuss;
 
 
-    public void load(){
-        for (int i = 0; i < 1000; i++) {
-            dis.add(new ArrayList<DiscussBean>());
+    private Thread getDataFromServer() {
+        return new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    FormBody.Builder params = new FormBody.Builder();
+                    params.add("articleId", String.valueOf(articleId));
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder()
+                            .url("http://8.131.250.250/bbs/getArticleById")
+                            .post(params.build())
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responseData = Objects.requireNonNull(response.body()).string();
+                    article = JSON.parseObject(responseData, Article.class);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                try {
+                    FormBody.Builder params = new FormBody.Builder();
+                    params.add("articleId", String.valueOf(articleId));
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder()
+                            .url("http://8.131.250.250/bbs/getReviews")
+                            .post(params.build())
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responseData = Objects.requireNonNull(response.body()).string();
+                    articleReviews = JSON.parseArray(responseData, ArticleReview.class);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+    }
+
+
+    private void init() {
+
+        Thread getDataThread = getDataFromServer();
+        try {
+            getDataThread.start();
+            getDataThread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
-        dis.get(0).add(new DiscussBean(
-                "棒棒棒！棒棒棒！棒棒棒！\n"+
-                        "但还可以改进\n"+
-                        "hhh"));
-        dis.get(0).add(new DiscussBean("棒！"));
-        dis.get(1).add(new DiscussBean("棒棒！"));
-        dis.get(2).add(new DiscussBean("棒棒棒！"));
-        dis.get(3).add(new DiscussBean("棒棒棒棒！"));
-        dis.get(4).add(new DiscussBean("棒棒棒棒棒！"));
-        dis.get(5).add(new DiscussBean("棒棒棒棒棒棒！"));
+
+        content = findViewById(R.id.show_tv_item_content);
+        title = findViewById(R.id.show_tv_item_title);
+        title.setText(article.getTitle());
+        content.setText(article.getBody());
+        init_discuss();
     }
 
-
-    private void init(){
-        Intent intant = getIntent();
-        Bundle bundle = intant.getExtras();
-        item = (ItemBean) bundle.getSerializable(ItemBean.KEY);
-        if(item == null) return;
-        content=findViewById(R.id.show_tv_item_content);
-        title=findViewById(R.id.show_tv_item_title);
-        title.setText(item.getTitle());
-        content.setText(item.getContent());
-    }
-
-    public void init_discuss(int postion) {
+    public void init_discuss() {
 
         recyclerView = findViewById(R.id.recyclerDiscussList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ItemShowActivity.this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
-        discussAdapter = new DiscussAdapter(dis.get(postion),ItemShowActivity.this);
-        //recyclerViewAdapter.setOnItemClickListener(this);
+        discussAdapter = new DiscussAdapter(articleReviews, ItemShowActivity.this);
         recyclerView.setAdapter(discussAdapter);
     }
 
@@ -86,23 +115,54 @@ public class ItemShowActivity extends AppCompatActivity {
         setContentView(R.layout.bbs_item_show);
         Intent intent=getIntent();
         Bundle bundle=intent.getExtras();
+        articleId = (long) bundle.get("ArticleId");
 
         init();
-        load();
-        init_discuss(bundle.getInt("pos"));
+
 
         mBtnDiscuss=findViewById(R.id.btn_discuss);
         mBtnDiscuss.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent=new Intent(ItemShowActivity.this, DiscussActivity.class);
-                //startActivityForResult(intent,3);
-                discusscontent=findViewById(R.id.edt_discuss_content);
-                discuss=new DiscussBean(discusscontent.getText().toString());
-                dis.get(bundle.getInt("pos")).add(discuss);
-                init_discuss(bundle.getInt("pos"));
+
+                discusscontent = findViewById(R.id.edt_discuss_content);
+                ArticleReview articleReview = new ArticleReview();
+                articleReview.setArticleId(article.getId());
+                articleReview.setUserId(MyApplication.getUser().getId());
+                articleReview.setBody(discusscontent.getText().toString());
+
+
+                Thread putArticleReviewThread = new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                            String json = com.alibaba.fastjson.JSON.toJSONString(articleReview);
+                            OkHttpClient client = new OkHttpClient();
+                            RequestBody body = RequestBody.create(JSON, json);
+                            Request request = new Request.Builder()
+                                    .url("http://8.131.250.250/bbs/putArticleReview")
+                                    .post(body)
+                                    .build();
+                            client.newCall(request).execute();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
+                try {
+                    putArticleReviewThread.start();
+                    putArticleReviewThread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                    //提交失败
+                    Toast.makeText(ItemShowActivity.this, "提交失败", Toast.LENGTH_LONG).show();
+                }
+
+                init();
                 discusscontent.setText("");
-                Toast.makeText(ItemShowActivity.this,"发布成功",Toast.LENGTH_LONG).show();
+                Toast.makeText(ItemShowActivity.this, "发布成功", Toast.LENGTH_LONG).show();
 
             }
         });

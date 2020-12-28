@@ -9,17 +9,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import com.app.R;
-import com.app.bbs.Bean.DiscussBean;
+import com.app.bbs.entity.ArticleReview;
 
 import java.util.List;
 
-public class DiscussAdapter extends RecyclerView.Adapter<DiscussAdapter.ViewHolder>{
+public class DiscussAdapter extends RecyclerView.Adapter<DiscussAdapter.ViewHolder> {
 
 
-    private List<DiscussBean> discussList;
-    public DiscussAdapter(List<DiscussBean> itemList, Context context) {
+    private List<ArticleReview> discussList;
+
+    public DiscussAdapter(List<ArticleReview> itemList, Context context) {
         this.discussList = itemList;
     }
 
@@ -33,8 +33,8 @@ public class DiscussAdapter extends RecyclerView.Adapter<DiscussAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull DiscussAdapter.ViewHolder holder, int position) {
-        DiscussBean discussBean=discussList.get(position);
-        holder.discussView.setText(discussBean.getDiscontent());
+        ArticleReview articleReview = discussList.get(position);
+        holder.discussView.setText(articleReview.getBody());
 
     }
 

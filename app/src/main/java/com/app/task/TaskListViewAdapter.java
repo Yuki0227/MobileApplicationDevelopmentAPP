@@ -87,9 +87,13 @@ public class TaskListViewAdapter extends BaseAdapter {
         if(MyApplication.getUser() != null){
             List<TaskAssign> taskAssignList = TaskFactory.getTask(MyApplication.getUser().getId());
             if(taskAssignList != null || taskAssignList.size() > 0){
-                String task_title = taskAssignList.get(position).getTaskTitle();
+                TaskAssign taskAssign = taskAssignList.get(position);
+                String task_title = taskAssign.getTaskTitle();
                 mHolder.tv_title.setText(task_title);
-                mHolder.tv_content.setText("content->" + task_title);
+                if(taskAssign.getTaskContent() != null && !taskAssign.getTaskContent().isEmpty()){
+                    String task_content = taskAssign.getTaskContent();
+                    mHolder.tv_content.setText(task_content);
+                }
             }
         }
 

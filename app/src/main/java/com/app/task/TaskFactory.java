@@ -160,6 +160,7 @@ public class TaskFactory {
                             taskAssign.setCreatorId(ans.optInt("creatorId"));
                             taskAssign.setAssigneeId(ans.optInt("assigneeId"));
                             taskAssign.setTaskTitle(ans.optString("taskTitle"));
+                            taskAssign.setTaskContent(ans.optString("taskContent"));
                             String taskCreateTime = ans.optString("taskCreateTime");
                             String taskFinishTime = ans.optString("taskFinishTime");
                             if(taskCreateTime != null && taskCreateTime.length() > 0){

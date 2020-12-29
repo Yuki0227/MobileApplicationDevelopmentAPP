@@ -18,6 +18,7 @@ import com.app.R;
 import com.app.bbs.Adapter.DiscussAdapter;
 import com.app.bbs.entity.Article;
 import com.app.bbs.entity.ArticleReview;
+import com.app.bbs.entity.ArticleView;
 
 import java.util.List;
 import java.util.Objects;
@@ -35,11 +36,11 @@ public class ItemShowActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private EditText discusscontent;
     private long articleId;
-    Article article;
+    ArticleView article;
     private Boolean succed=false;
     List<ArticleReview> articleReviews;
 
-    TextView title, content;
+    TextView title, content, username;
 
     private Button mBtnDiscuss;
 
@@ -58,7 +59,7 @@ public class ItemShowActivity extends AppCompatActivity {
                             .build();
                     Response response = client.newCall(request).execute();
                     String responseData = Objects.requireNonNull(response.body()).string();
-                    article = JSON.parseObject(responseData, Article.class);
+                    article = JSON.parseObject(responseData, ArticleView.class);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -95,6 +96,8 @@ public class ItemShowActivity extends AppCompatActivity {
 
         content = findViewById(R.id.bbs_tv_article);
         title = findViewById(R.id.show_tv_item_title);
+        username=findViewById(R.id.tv_item_username);
+        username.setText(article.getAuthor());
         title.setText(article.getTitle());
         content.setText(article.getBody());
         init_discuss();
@@ -170,7 +173,7 @@ public class ItemShowActivity extends AppCompatActivity {
                 if(succed)
                 {
                     Toast.makeText(ItemShowActivity.this, "发布成功", Toast.LENGTH_LONG).show();
-                }else Toast.makeText(ItemShowActivity.this, "提交失败", Toast.LENGTH_LONG).show();
+                }else Toast.makeText(ItemShowActivity.this, "请先登录", Toast.LENGTH_LONG).show();
 
 
             }

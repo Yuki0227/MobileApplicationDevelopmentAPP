@@ -2,6 +2,7 @@ package com.app.bbs;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,11 @@ import com.app.bbs.Activity.ReleaseActivity;
 import com.app.bbs.Adapter.RecyclerViewAdapter;
 import com.app.bbs.Bean.ItemBean;
 import com.app.bbs.entity.Article;
+import com.app.bbs.entity.ArticleView;
+import com.app.util.User;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,7 +64,14 @@ public class BBSFragment extends Fragment {
         this.fragmentText = fragmentText;
     }
 
-    List<Article> itemList = new ArrayList<>();
+    List<ArticleView> itemList = new ArrayList<>();
+
+    private String id;
+    private String name;
+    private String userId;
+
+    User user;
+    private TextView username;
 
 
     @Override
@@ -86,7 +98,7 @@ public class BBSFragment extends Fragment {
     public void onClick(View parent, int position) {
         Intent intent = new Intent(getActivity(), ItemShowActivity.class);
         Bundle bundle = new Bundle();
-        Article item = itemList.get(position);
+        ArticleView item = itemList.get(position);
 
         intent.putExtra("ArticleId", item.getId());
         bundle.putSerializable(ItemBean.KEY, item);
@@ -107,7 +119,7 @@ public class BBSFragment extends Fragment {
                             .build();
                     Response response = client.newCall(request).execute();
                     String responseData = Objects.requireNonNull(response.body()).string();
-                    itemList = JSON.parseArray(responseData, Article.class);
+                    itemList = JSON.parseArray(responseData, ArticleView.class);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

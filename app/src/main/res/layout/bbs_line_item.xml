@@ -22,6 +22,11 @@
 
 
             android:text="题目" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_item_username"
+            android:paddingLeft="5dp" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,7 +40,7 @@
             android:textColor="#80000000"
             android:textSize="10sp"
             android:text="xxxxxxxxxxxxxxxxxxxxxxxxx"
-            android:maxLines="2"
+            android:maxLines="7"
             android:ellipsize="end"/>
 
     </LinearLayout>

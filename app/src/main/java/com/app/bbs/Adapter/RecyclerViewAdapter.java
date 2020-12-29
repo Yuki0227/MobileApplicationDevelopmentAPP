@@ -11,15 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.R;
 import com.app.bbs.entity.Article;
+import com.app.bbs.entity.ArticleView;
 
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private List<Article> itemList;
+    private List<ArticleView> itemList;
     private OnItemClickListener onItemClickListener = null;
 
-    public RecyclerViewAdapter(List<Article> itemList, Context context) {
+    public RecyclerViewAdapter(List<ArticleView> itemList, Context context) {
         this.itemList = itemList;
     }
 
@@ -32,7 +33,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull final RecyclerViewAdapter.ViewHolder holder, final int position) {
-        Article item = itemList.get(position);
+        ArticleView item = itemList.get(position);
         holder.itemName.setText(item.getTitle());
         holder.itemLabels.setText(item.getBody());
 

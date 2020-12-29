@@ -118,24 +118,27 @@ public class TaskFragment extends Fragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(getContext(),"长按" + position,Toast.LENGTH_SHORT).show();
-                Adapter adapter = parent.getAdapter();
-                String s = adapter.getItem(position).toString();
-                String[] s1 = s.split("'");
-                String task = s1[1];
-                String[] s2 = task.split(":");
-                String title = s2[0];
-                String content = s2[1];
+
+                //获取任务的各项内容
+                TaskAssign taskAssign;
+                List<TaskAssign> taskAssignList = TaskFactory.getTask(MyApplication.getUser().getId());
+                taskAssign = taskAssignList.get(position);
+                String task_title = taskAssign.getTaskTitle();
+                String task_content = taskAssign.getTaskContent();
+                int assigneeId = taskAssign.getAssigneeId();
+
+                //将任务的各项内容传递到TaskUpdateActivity
                 Intent intent = new Intent(getActivity(),TaskUpdateActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("task_title",title);
-                bundle.putString("task_content",content);
+                bundle.putInt("position",position);
+                bundle.putString("task_title",task_title);
+                bundle.putString("task_content",task_content);
+                bundle.putInt("assigneeId",assigneeId);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 return true;
             }
         });
-
-
 
         listView.setAdapter(taskListViewAdapter);
 

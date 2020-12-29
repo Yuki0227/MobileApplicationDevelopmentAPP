@@ -1,5 +1,6 @@
 package com.app.exercise.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -9,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.app.R;
 
 public class SettingActivity extends AppCompatActivity {
+
 
     private Spinner choiceQuestionNum;
     private Spinner programmingQuestionNum;
@@ -31,14 +33,14 @@ public class SettingActivity extends AppCompatActivity {
 
 
         btn_question.setOnClickListener(v -> {
-//            choiceQuestion =(String) choiceQuestionNum.getSelectedItem();
-//            programmingQuestion = (String) programmingQuestionNum.getSelectedItem();
-//            judgementQuestion = (String) judgementQuestionNum.getSelectedItem();
-//            Intent intent = new Intent(SettingActivity.this, .class);
-//            intent.putExtra("choiceQuestion", choiceQuestion);
-//            intent.putExtra("programmingQuestion", programmingQuestion);
-//            intent.putExtra("judgementQuestion", judgementQuestion);
-//            startActivity(intent);
+            choiceQuestion = (String) choiceQuestionNum.getSelectedItem();
+            programmingQuestion = (String) programmingQuestionNum.getSelectedItem();
+            judgementQuestion = (String) judgementQuestionNum.getSelectedItem();
+            Intent intent = new Intent(SettingActivity.this, QuestionActivity.class);
+            intent.putExtra("choiceQuestion", choiceQuestion);
+            intent.putExtra("programmingQuestion", programmingQuestion);
+            intent.putExtra("judgementQuestion", judgementQuestion);
+            startActivity(intent);
         });
 
 

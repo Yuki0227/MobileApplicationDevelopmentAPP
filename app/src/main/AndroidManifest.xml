@@ -2,8 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.app">
     <!-- 获取联网权限 -->
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- 获取读写存储空间权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 获取读写存储空间权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".MyApplication"
@@ -32,6 +36,10 @@
         <activity android:name=".email.activity.ListActivity" />
         <activity android:name=".email.activity.WatchActivity" />
         <activity android:name=".email.activity.SettingsActivity" />
+
+        <activity android:name=".exercise.activity.SettingActivity" />
+        <activity android:name=".exercise.activity.QuestionActivity" />
+        <activity android:name=".exercise.activity.ResultActivity" />
     </application>
 
 </manifest>

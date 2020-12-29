@@ -1,5 +1,6 @@
 package com.app.exercise;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.app.R;
+import com.app.exercise.activity.SettingActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,7 +22,7 @@ import com.app.R;
 public class ExerciseFragment extends Fragment {
 
 
-    private String fragmentText;
+    private final String fragmentText;
     private Button btn_do;
     private Button btn_history;
 
@@ -38,9 +40,7 @@ public class ExerciseFragment extends Fragment {
         btn_do = view.findViewById(R.id.exercise_btn_do);
         btn_history = view.findViewById(R.id.exercise_btn_history);
 
-        btn_do.setOnClickListener(v -> {
-
-        });
+        btn_do.setOnClickListener(v -> startActivity(new Intent(getActivity(), SettingActivity.class)));
 
         return view;
     }

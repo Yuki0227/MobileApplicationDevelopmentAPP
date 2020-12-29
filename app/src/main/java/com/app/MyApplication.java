@@ -22,10 +22,6 @@ public class MyApplication extends Application {
     private static EmailKit.Config config;
     private static User user;
     private static List<TaskAssign> taskList;
-    //所有的被指派的任务
-    private static List<TaskAssign> allAssignedTask;
-    //所有的被自己创建的任务
-    private static List<TaskAssign> allCreatedTask;
     //数据库中的所有用户
     private static List<User> allUsers;
 
@@ -38,8 +34,6 @@ public class MyApplication extends Application {
         user = null;
         allUsers = null;
         taskList = null;
-        allAssignedTask = null;
-        allCreatedTask = null;
         context = getApplicationContext();
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
@@ -115,21 +109,6 @@ public class MyApplication extends Application {
         MyApplication.taskList = taskList;
     }
 
-    public static List<TaskAssign> getAllAssignedTask() {
-        return allAssignedTask;
-    }
-
-    public static void setAllAssignedTask(List<TaskAssign> allAssignedTask) {
-        MyApplication.allAssignedTask = allAssignedTask;
-    }
-
-    public static List<TaskAssign> getAllCreatedTask() {
-        return allCreatedTask;
-    }
-
-    public static void setAllCreatedTask(List<TaskAssign> allCreatedTask) {
-        MyApplication.allCreatedTask = allCreatedTask;
-    }
 
     public static List<User> getAllUsers() {
         return allUsers;

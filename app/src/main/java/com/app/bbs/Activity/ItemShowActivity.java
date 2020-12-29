@@ -93,7 +93,7 @@ public class ItemShowActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        content = findViewById(R.id.show_tv_item_content);
+        content = findViewById(R.id.bbs_tv_article);
         title = findViewById(R.id.show_tv_item_title);
         title.setText(article.getTitle());
         content.setText(article.getBody());

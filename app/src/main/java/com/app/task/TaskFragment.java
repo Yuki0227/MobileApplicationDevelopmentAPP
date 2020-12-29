@@ -1,5 +1,6 @@
 package com.app.task;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
@@ -30,11 +31,14 @@ import androidx.fragment.app.Fragment;
 import com.app.MyApplication;
 import com.app.R;
 import com.app.task.entity.TaskAssign;
+import com.app.util.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import okhttp3.internal.concurrent.Task;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,6 +53,7 @@ public class TaskFragment extends Fragment {
     //private List<Map<String, String>> list = null;
     private TaskListViewAdapter taskListViewAdapter;
     private Toolbar task_toolbar;
+    public static int search_mode = 0;      //查询模式,0表示查询所有、1表示只查询自己创建的任务、2表示只查询被指派人是自己的任务
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,6 +84,24 @@ public class TaskFragment extends Fragment {
                         Intent intent= new Intent(getActivity(),Web_Activity.class);
                     startActivity(intent);
                          */
+                        break;
+                    case R.id.menu_task_search_all:
+                        Toast.makeText(getContext(),"点击了查询所有",Toast.LENGTH_SHORT).show();
+                        search_mode = 0;
+                        //List<TaskAssign> taskAssignList = TaskFactory.getTask(MyApplication.getUser().getId());
+                        //MyApplication.setTaskList(taskAssignList);
+                        break;
+                    case R.id.menu_task_search_created:
+                        Toast.makeText(getContext(),"点击了查询自己创建的",Toast.LENGTH_SHORT).show();
+                        search_mode = 1;
+                        //List<TaskAssign> taskAssignList1 = TaskFactory.findAllCreatedTask(MyApplication.getUser().getId());
+                        //MyApplication.setTaskList(taskAssignList1);
+                        break;
+                    case R.id.menu_task_search_assigneed:
+                        Toast.makeText(getContext(),"点击了查询被分配的",Toast.LENGTH_SHORT).show();
+                        search_mode = 2;
+                        //List<TaskAssign> taskAssignList2 = TaskFactory.findAllAssignedTask(MyApplication.getUser().getId());
+                        //MyApplication.setTaskList(taskAssignList2);
                         break;
                 }
                 return false;

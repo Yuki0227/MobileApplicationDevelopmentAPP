@@ -9,24 +9,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@drawable/ic_edt">
 
         <TextView
             android:id="@+id/tv_item_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
+            android:paddingLeft="5dp"
             android:textColor="#000000"
-            android:textSize="15sp"
-            android:background="#0099FF"
+
+
 
             android:text="题目" />
-        <TextView
-            android:id="@+id/item_user_name"
-            android:layout_width="match_parent"
+        <ImageView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#00CCFF"
-            android:textSize="10sp"/>
+            android:src="@drawable/bbs_title_line"/>
+
         <TextView
             android:id="@+id/tv_item_labels"
             android:layout_width="match_parent"

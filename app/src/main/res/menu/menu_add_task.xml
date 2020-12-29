@@ -8,8 +8,21 @@
         android:title="@string/menu_title_add_task"
         app:showAsAction="ifRoom"
         />
-
-
+    <item
+        android:id="@+id/menu_task_search_all"
+        android:title="查询所有"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/menu_task_search_created"
+        android:title="查询自己创建的"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/menu_task_search_assigneed"
+        android:title="查询被分配的"
+        app:showAsAction="never"
+        />
 
 
 </menu>

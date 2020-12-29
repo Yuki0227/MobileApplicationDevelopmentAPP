@@ -43,7 +43,7 @@ public class BBSFragment extends Fragment {
     private String fragmentText;
 
     private TextView fragmentTextView;
-    private Button mBtnRelease;
+    //private Button mBtnRelease;
     private LinearLayout mLayIine;
     private Article release;
 
@@ -53,7 +53,7 @@ public class BBSFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
-    FloatingActionButton floatingActionButton;
+    FloatingActionButton mBtnRelease;
 
     public BBSFragment(String fragmentText) {
         this.fragmentText = fragmentText;

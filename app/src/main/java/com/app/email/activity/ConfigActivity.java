@@ -89,6 +89,11 @@ public class ConfigActivity extends BaseActivity {
         ((Switch) findViewById(R.id.email_activity_config_smtp_ssl_switch)).setChecked(true);
         ((Switch) findViewById(R.id.email_activity_config_imap_ssl_switch)).setChecked(true);
 
+        MicroKV kv = MicroKV.customize("config", true);
+        if (kv.containsKV("nickname")) {
+            ((EditText) findViewById(R.id.email_activity_config_nickname_et)).setText(kv.getString("nickname"));
+        }
+
     }
 
     /**

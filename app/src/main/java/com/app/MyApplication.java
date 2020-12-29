@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import android.os.StrictMode;
+import android.util.Log;
 
 import com.app.task.entity.TaskAssign;
 import com.app.util.User;
@@ -37,25 +38,24 @@ public class MyApplication extends Application {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
+        try {
+            restoreLoginStatus();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        //临时添加固定数据
-        String account, password, nickname, smtpHost, imapHost, smtpPort, imapPort;
-        boolean smtpSSL, imapSSL;
-        account = "";
-        password = "";
-        smtpHost = "smtp.qq.com";
-        imapHost = "imap.qq.com";
-        smtpPort = "465";
-        imapPort = "993";
-        smtpSSL = true;
-        imapSSL = true;
-        EmailKit.Config config = new EmailKit.Config()
-                .setSMTP(smtpHost, Integer.parseInt(smtpPort), smtpSSL)
-                .setIMAP(imapHost, Integer.parseInt(imapPort), imapSSL)
-                .setAccount(account)
-                .setPassword(password);
-        setConfig(config);
+    }
 
+    private static void restoreLoginStatus() {
+
+        User user = null;
+        MicroKV kv = MicroKV.defaultMicroKV();
+        if (kv.containsKV("id")) {
+            user = new User(kv.getInt("id"), kv.getString("name"), kv.getString("password"));
+            Log.e("restoreUser", user.toString());
+        }
+
+        MyApplication.setUser(user);
     }
 
     public static Context getContext() {
@@ -75,11 +75,31 @@ public class MyApplication extends Application {
     }
 
     public static void setUser(User user) {
+        if (user != null) {
+            MicroKV.defaultMicroKV()
+                    .setKV("id", user.getId())
+                    .setKV("name", user.getName())
+                    .setKV("password", user.getPassword())
+                    .save();
+
+        } else {
+            MicroKV.defaultMicroKV().clear();
+        }
         MyApplication.user = user;
     }
 
     public static void setUser(int id, String name, String password) {
         MyApplication.user = new User(id, name, password);
+        MicroKV.defaultMicroKV()
+                .setKV("id", user.getId())
+                .setKV("name", user.getName())
+                .setKV("password", user.getPassword())
+                .save();
+
+        MicroKV kv = MicroKV.defaultMicroKV();
+        if (kv.containsKV("id")) {
+            Log.e("KVUser", user.toString());
+        }
     }
 
     public static void setContext(Context context) {

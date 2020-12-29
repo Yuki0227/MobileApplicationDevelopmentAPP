@@ -43,8 +43,8 @@
 
     </FrameLayout>
         <Button
-        android:id="@+id/btn_login"
-        android:layout_width="300dp"
+        android:id="@+id/exercise_btn_do"
+            android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="点击登录"
         android:textColor="@color/white"
@@ -65,6 +65,6 @@
         android:background="@drawable/ic_click_bt"
         android:layout_marginTop="40dp"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/btn_login"/>
+        android:layout_below="@+id/exercise_btn_do" />
 
 </RelativeLayout>

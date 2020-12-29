@@ -101,11 +101,6 @@ public class MyApplication extends Application {
                 .setKV("name", user.getName())
                 .setKV("password", user.getPassword())
                 .save();
-
-        MicroKV kv = MicroKV.defaultMicroKV();
-        if (kv.containsKV("id")) {
-            Log.e("KVUser", user.toString());
-        }
     }
 
     public static void setContext(Context context) {

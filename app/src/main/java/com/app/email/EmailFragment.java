@@ -17,6 +17,7 @@ import com.app.email.activity.ConfigActivity;
 import com.app.email.activity.ListActivity;
 import com.app.email.activity.SendActivity;
 import com.app.email.controls.Controls;
+import com.app.util.CommonUtils;
 import com.smailnet.emailkit.EmailKit;
 import com.smailnet.microkv.MicroKV;
 
@@ -43,34 +44,43 @@ public class EmailFragment extends Fragment {
     }
 
     void initData() {
-        MicroKV kv = MicroKV.customize("config", true);
-        if (kv.containsKV("folder_list")) {
-            List<String> list = new ArrayList<>(kv.getStringSet("folder_list"));
-            ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
-                    android.R.layout.simple_list_item_1, list);
-            listView.setAdapter(adapter);
-        } else {
-            EmailKit.useIMAPService(MyApplication.getConfig())
-                    .getDefaultFolderList(new EmailKit.GetFolderListCallback() {
-                        @Override
-                        public void onSuccess(List<String> folderList) {
-                            kv.setKV("folder_list", new HashSet<>(folderList)).save();
-                            ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
-                                    android.R.layout.simple_list_item_1, folderList);
-                            listView.setAdapter(adapter);
-                        }
+        if (MyApplication.getConfig() != null) {
+            MicroKV kv = MicroKV.customize("config", true);
+            if (kv.containsKV("folder_list")) {
+                List<String> list = new ArrayList<>(kv.getStringSet("folder_list"));
+                ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
+                        android.R.layout.simple_list_item_1, list);
+                listView.setAdapter(adapter);
+            } else {
+                EmailKit.useIMAPService(MyApplication.getConfig())
+                        .getDefaultFolderList(new EmailKit.GetFolderListCallback() {
+                            @Override
+                            public void onSuccess(List<String> folderList) {
+                                kv.setKV("folder_list", new HashSet<>(folderList)).save();
+                                ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
+                                        android.R.layout.simple_list_item_1, folderList);
+                                listView.setAdapter(adapter);
+                            }
 
-                        @Override
-                        public void onFailure(String errMsg) {
-                            Controls.toast(errMsg);
-                        }
-                    });
+                            @Override
+                            public void onFailure(String errMsg) {
+                                Controls.toast(errMsg);
+                            }
+                        });
+            }
+        } else {
+            CommonUtils.showLongMsg(getActivity(), "邮箱功能无法使用，请设置邮箱信息");
         }
     }
 
     void initLayoutBind() {
         getView().findViewById(R.id.email_activity_main_edit_btn)
-                .setOnClickListener(v -> startActivity(new Intent(getActivity(), SendActivity.class)));
+                .setOnClickListener(v -> {
+                    if (MyApplication.getUser() == null) {
+                        CommonUtils.showLongMsg(getActivity(), "请先设置邮箱信息");
+                    } else
+                        startActivity(new Intent(getActivity(), SendActivity.class));
+                });
 
         getView().findViewById(R.id.email_activity_main_settings_btn)
                 .setOnClickListener(v -> startActivity(new Intent(getActivity(), ConfigActivity.class)));

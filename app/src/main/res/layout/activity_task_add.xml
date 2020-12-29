@@ -69,11 +69,11 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"/>
         </LinearLayout>
+
         <Spinner
             android:id="@+id/task_assign_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <View

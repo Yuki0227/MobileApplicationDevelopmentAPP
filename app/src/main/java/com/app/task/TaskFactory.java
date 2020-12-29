@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.sql.Array;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,8 +28,9 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.internal.concurrent.Task;
 
-//此类仅做测试用,测试完即删除
+
 public class TaskFactory {
 
 
@@ -194,6 +196,65 @@ public class TaskFactory {
         }).start();
         return MyApplication.getTaskList();
     }
+
+    //根据用户id来返回被指派者是它的所有任务
+    public static List<TaskAssign> findAllAssignedTask(Integer userId){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    FormBody.Builder params = new FormBody.Builder();
+                    params.add("assigneeId", userId+"");
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder()
+                            .url("http://8.131.250.250/taskAssign/findAllAssigned")
+                            .post(params.build())
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responseData = Objects.requireNonNull(response.body()).string();
+                    Log.d("responseData", responseData);
+                    //将JSON字符串转换成对象链表(这个地方有待进一步测试)
+                    List<TaskAssign> taskAssignList = new ArrayList<TaskAssign>();
+                    taskAssignList = JSON.parseArray(responseData,TaskAssign.class);
+                    MyApplication.setAllAssignedTask(taskAssignList);
+                } catch (Exception e) {
+                    MyApplication.setAllAssignedTask(null);
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        return MyApplication.getAllAssignedTask();
+    }
+
+    //根据用户id来返回创建者是它的所有任务
+    public static List<TaskAssign> findAllCreatedTask(Integer userId){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    FormBody.Builder params = new FormBody.Builder();
+                    params.add("creatorId", userId+"");
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder()
+                            .url("http://8.131.250.250/taskAssign/findAllCreated")
+                            .post(params.build())
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responseData = Objects.requireNonNull(response.body()).string();
+                    Log.d("responseData", responseData);
+                    //将JSON字符串转换成对象链表(这个地方有待进一步测试)
+                    List<TaskAssign> taskAssignList = new ArrayList<TaskAssign>();
+                    taskAssignList = JSON.parseArray(responseData,TaskAssign.class);
+                    MyApplication.setAllCreatedTask(taskAssignList);
+                } catch (Exception e) {
+                    MyApplication.setAllCreatedTask(null);
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+        return MyApplication.getAllCreatedTask();
+    }
+
 
     //获得数据库中用户表中的所有用户
     public static List<User> getAllUsers() {

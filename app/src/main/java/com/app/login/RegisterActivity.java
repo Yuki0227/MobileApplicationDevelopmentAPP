@@ -77,8 +77,6 @@ public class RegisterActivity extends AppCompatActivity {
                     e.printStackTrace();
 
                 }
-
-
                 final boolean finalRegisterSucceed = registerSucceed;
                 runOnUiThread(new Runnable() {
                     @Override

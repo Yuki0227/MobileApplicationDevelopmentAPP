@@ -119,9 +119,7 @@ public class LoginActivity extends AppCompatActivity implements Serializable {
                     JSONObject jsonObj = new JSONObject(responseData);
                     id = jsonObj.getString("id");
                     name = jsonObj.getString("name");
-
                     MyApplication.setUser(Integer.parseInt(id), name, "");
-
                     loginSucceed = true;
 
                     //用户登录成功,就根据其id预处理任务列表

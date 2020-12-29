@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterViewFlipper;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Chronometer;
 import android.widget.ImageView;
@@ -76,6 +77,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     private String queprogram, input, output, sample_input, sample_output;
     private TextView judgement_tv_que, judgement_tv_you, judgement_tv_answer, judgement_tv_detail;
     private CheckBox judgement_cb_choice1, judgement_cb_choice2;
+    private Button exercise_btn_submit;
 
 
     @Override
@@ -133,14 +135,14 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                 table = "que";
                 content = "题库";
                 break;
-            case MyTag.COLLECT://收藏
-                table = "collection ,que where collection.qid=que._id ";
-                content = "收藏";
-                break;
-            case MyTag.WRONG://错题
-                table = "wrong,que where wrong.qid=que._id ";
-                content = "错题";
-                break;
+//           case MyTag.COLLECT://收藏
+//                table = "collection ,que where collection.qid=que._id ";
+//                content = "收藏";
+//                break;
+//            case MyTag.WRONG://错题
+//                table = "wrong,que where wrong.qid=que._id ";
+//                content = "错题";
+//                break;
         }
     }
 
@@ -159,7 +161,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
-                if (SystemClock.elapsedRealtime() - chronometer.getBase() == 1.5 * 360 * 1000) {
+                if (SystemClock.elapsedRealtime() - chronometer.getBase() >= 1.5*360* 1000) {
                     Toast.makeText(QuestionActivity.this, "考试时间到", Toast.LENGTH_LONG).show();
                     saveExam();
                 }
@@ -292,6 +294,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                 tv_output = root.findViewById(R.id.exercise_program_tv_output);
                 tv_sample_input = root.findViewById(R.id.exercise_program_tv_sample_input);
                 tv_sample_output = root.findViewById(R.id.exercise_program_tv_sample_output);
+                exercise_btn_submit = root.findViewById(R.id.exercise_btn_submit);
 
                 //获取数据
                 type = programmingQuestion.getType();
@@ -307,6 +310,13 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                 tv_output.setText(output);
                 tv_sample_input.setText(sample_input);
                 tv_sample_output.setText(sample_output);
+                exercise_btn_submit.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent =new Intent(QuestionActivity.this,SubmitActivity.class);
+                        startActivity(intent);
+                    }
+                });
 
             } else if ("判断".equals(question.getType())) {
                 JudgmentQuestion judgmentQuestion = (JudgmentQuestion) question;
@@ -403,7 +413,6 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                     moveCorrect();
                 } else {
                     //错误则保存错题，显示答案
-                    saveWrong(sb.toString());
                     disableChecked(pos);
                 }
             } else {
@@ -421,10 +430,18 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                 if (you.equals(answer)) {
                     moveCorrect();
                 } else {
-                    saveWrong(sb.toString());
                     disableChecked(pos);
                 }
             } else {
+                Toast.makeText(QuestionActivity.this, "请选择答案", Toast.LENGTH_SHORT).show();
+            }
+        }else if(question.getType().equals("编程")){
+            Intent intent = getIntent();
+            String submit = intent.getStringExtra("submit");
+            if(!submit.equals(null)){
+                moveCorrect();
+            }
+            else {
                 Toast.makeText(QuestionActivity.this, "请选择答案", Toast.LENGTH_SHORT).show();
             }
         }
@@ -436,7 +453,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     private void moveCorrect() {
         score++;
         tvScore.setText("得分：" + score + "/" + num);
-//        vf.showNext();
+        vf.showNext();
 //        int c=ToolHelper.loadDB(this,"select _id from wrong where qid="+qid).getCount();
 //        if(c>0)
 //        ToolHelper.excuteDB(this, "delete from wrong where qid=" +qid);
@@ -473,16 +490,16 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
-    //保存错题
-    private void saveWrong(String ans) {
-        //int c = ToolHelper.loadDB(this,"select _id from wrong where qid="+qid).getCount();
-        if (/*c==0*/false) {
-            Date date = new Date();
-            SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-            String mydate = ft.format(date);
-            //ToolHelper.excuteDB(this, "insert into wrong (_id,qid,answer,anTime) values (" + Math.random() * 10000 + "," + qid + ",'" + ans + "','" + mydate + "')");
-        }
-    }
+//    //保存错题
+//    private void saveWrong(String ans) {
+//        //int c = ToolHelper.loadDB(this,"select _id from wrong where qid="+qid).getCount();
+//        if (/*c==0*/false) {
+//            Date date = new Date();
+//            SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+//            String mydate = ft.format(date);
+//            //ToolHelper.excuteDB(this, "insert into wrong (_id,qid,answer,anTime) values (" + Math.random() * 10000 + "," + qid + ",'" + ans + "','" + mydate + "')");
+//        }
+//    }
 
 
     @Override
@@ -570,19 +587,19 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             case R.id.exercise_img_pre:
                 vf.showPrevious();
                 break;
-            case R.id.exercise_img_collect://收藏
-                if (!isCollect) {
-                    imgCollect.setImageResource(R.drawable.exercise_star_on);
-                    //ToolHelper.excuteDB(this, "insert into collection (_id,qid) values (" + Math.random() * 10000 + "," + qid + ")");
-                    Toast.makeText(this, "成功收藏", Toast.LENGTH_SHORT).show();
-                    isCollect = true;
-                } else {
-                    imgCollect.setImageResource(R.drawable.exercise_star1);
-                    //ToolHelper.excuteDB(this,"delete from collection where qid="+qid);
-                    Toast.makeText(this, "取消收藏", Toast.LENGTH_SHORT).show();
-                    isCollect = false;
-                }
-                break;
+//            case R.id.exercise_img_collect://收藏
+//                if (!isCollect) {
+//                    imgCollect.setImageResource(R.drawable.exercise_star_on);
+//                    //ToolHelper.excuteDB(this, "insert into collection (_id,qid) values (" + Math.random() * 10000 + "," + qid + ")");
+//                    Toast.makeText(this, "成功收藏", Toast.LENGTH_SHORT).show();
+//                    isCollect = true;
+//                } else {
+//                    imgCollect.setImageResource(R.drawable.exercise_star1);
+//                    //ToolHelper.excuteDB(this,"delete from collection where qid="+qid);
+//                    Toast.makeText(this, "取消收藏", Toast.LENGTH_SHORT).show();
+//                    isCollect = false;
+//                }
+//                break;
 //            case R.id.img_card:
 //                Intent intent=new Intent(this,CardActivity.class);
 //                intent.putExtra("num",num);

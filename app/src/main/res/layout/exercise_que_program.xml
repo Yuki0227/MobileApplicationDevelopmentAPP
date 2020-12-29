@@ -73,14 +73,9 @@
             android:layout_height="wrap_content"
             android:padding="8dp" />
 
-        <TextView
-            android:id="@+id/program_tv_you"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:textColor="@color/colorAccent" />
 
         <Button
+            android:id="@+id/exercise_btn_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/blue"

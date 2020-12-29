@@ -49,6 +49,7 @@ public class ResultActivity extends AppCompatActivity {
             public void onClick(View v) {
 //                Intent intent1=new Intent(ResultActivity.this,ExamActivity.class);
 //                startActivity(intent1);
+                finish();
             }
         });
     }

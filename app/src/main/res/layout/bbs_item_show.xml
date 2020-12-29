@@ -4,67 +4,95 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#F0F8FF"
-
-    android:paddingTop="15dp"
-    android:paddingBottom="40dp"
-    android:paddingHorizontal="15dp">
+    android:paddingTop="24dp">
     <TextView
         android:id="@+id/show_tv_item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
 
         android:textSize="25sp"/>
 
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:fadeScrollbars="true"
+        >
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
+
+
             <TextView
-                android:id="@+id/show_tv_item_content"
+                android:id="@+id/bbs_tv_article"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#000000" />
+                android:padding="5dp"
+                android:textColor="#000000"
+                android:background="@drawable/ic_bbs_tx"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"/>
             <TextView
+                android:id="@+id/bbs_tv_article_review"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:text="评论区"
-                android:background="#11EEEE"
-                android:layout_marginTop="15dp"/>
+                android:paddingLeft="5dp"
+                android:text="评论区:"
+                android:background="#E0EEEE"
+                android:layout_marginTop="15dp"
+                android:layout_below="@+id/bbs_tv_article"/>
             <LinearLayout
+                android:id="@+id/bbs_tv_review"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:scrollbarAlwaysDrawHorizontalTrack="false"
-                android:scrollbarAlwaysDrawVerticalTrack="true">
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:layout_below="@+id/bbs_tv_article_review"
+                android:layout_marginTop="6dp">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerDiscussList"
+                    android:background="@drawable/ic_edt"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:padding="5dp"/>
             </LinearLayout>
             <TextView
+                android:id="@+id/bbs_tv_article_myreview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="发表评论"
-                android:layout_marginTop="20dp" />
+                android:text="我要评论:"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="8dp"
+                android:layout_below="@+id/bbs_tv_review"/>
             <EditText
                 android:id="@+id/edt_discuss_content"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                android:background="@drawable/bg_edittext"/>
+                android:background="@drawable/bg_edittext"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_below="@+id/bbs_tv_article_myreview"/>
             <Button
                 android:id="@+id/btn_discuss"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_click_bt"
                 android:textColor="@color/white"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/edt_discuss_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="15dp"
-                android:text="我要评论" />
-        </LinearLayout>
+                android:text="发表评论" />
+
+        </RelativeLayout>
     </ScrollView>
 </LinearLayout>

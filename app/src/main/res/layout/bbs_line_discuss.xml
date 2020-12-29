@@ -20,6 +20,10 @@
             android:text="内容"
             android:maxLines="2"
             android:ellipsize="end"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/spline"/>
         <TextView
             android:id="@+id/discuss_user_name"
             android:layout_width="match_parent"

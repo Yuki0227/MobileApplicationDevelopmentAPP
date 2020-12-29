@@ -76,7 +76,7 @@ public class EmailFragment extends Fragment {
     void initLayoutBind() {
         getView().findViewById(R.id.email_activity_main_edit_btn)
                 .setOnClickListener(v -> {
-                    if (MyApplication.getUser() == null) {
+                    if (MyApplication.getConfig() == null) {
                         CommonUtils.showLongMsg(getActivity(), "请先设置邮箱信息");
                     } else
                         startActivity(new Intent(getActivity(), SendActivity.class));

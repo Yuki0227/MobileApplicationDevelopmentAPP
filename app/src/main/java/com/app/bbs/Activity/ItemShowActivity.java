@@ -36,6 +36,7 @@ public class ItemShowActivity extends AppCompatActivity {
     private EditText discusscontent;
     private long articleId;
     Article article;
+    private Boolean succed=false;
     List<ArticleReview> articleReviews;
 
     TextView title, content;
@@ -126,16 +127,17 @@ public class ItemShowActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 discusscontent = findViewById(R.id.edt_discuss_content);
-                ArticleReview articleReview = new ArticleReview();
-                articleReview.setArticleId(article.getId());
-                articleReview.setUserId(MyApplication.getUser().getId());
-                articleReview.setBody(discusscontent.getText().toString());
+
 
 
                 Thread putArticleReviewThread = new Thread(new Runnable() {
                     @Override
                     public void run() {
                         try {
+                            ArticleReview articleReview = new ArticleReview();
+                            articleReview.setArticleId(article.getId());
+                            articleReview.setUserId(MyApplication.getUser().getId());
+                            articleReview.setBody(discusscontent.getText().toString());
                             MediaType JSON = MediaType.parse("application/json; charset=utf-8");
                             String json = com.alibaba.fastjson.JSON.toJSONString(articleReview);
                             OkHttpClient client = new OkHttpClient();
@@ -145,7 +147,9 @@ public class ItemShowActivity extends AppCompatActivity {
                                     .post(body)
                                     .build();
                             client.newCall(request).execute();
+                            succed=true;
                         } catch (Exception e) {
+
                             e.printStackTrace();
                         }
                     }
@@ -157,12 +161,17 @@ public class ItemShowActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                     //提交失败
-                    Toast.makeText(ItemShowActivity.this, "提交失败", Toast.LENGTH_LONG).show();
+
+
                 }
 
                 init();
                 discusscontent.setText("");
-                Toast.makeText(ItemShowActivity.this, "发布成功", Toast.LENGTH_LONG).show();
+                if(succed)
+                {
+                    Toast.makeText(ItemShowActivity.this, "发布成功", Toast.LENGTH_LONG).show();
+                }else Toast.makeText(ItemShowActivity.this, "提交失败", Toast.LENGTH_LONG).show();
+
 
             }
         });

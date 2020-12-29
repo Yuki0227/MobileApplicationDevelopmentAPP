@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:orientation="vertical"
+    android:paddingTop="15dp"
+    android:paddingBottom="40dp"
+    android:paddingHorizontal="15dp"
+
     android:background="#F0F8FF">
+
 
     <ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="450dp">
+        android:layout_height="wrap_content"
+        >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,38 +30,19 @@
                 android:layout_height="match_parent" />
 
 
+
+
         </LinearLayout>
     </ScrollView>
-
-    <EditText
-        android:id="@+id/edt_relese_title"
-        android:layout_width="match_parent"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_release"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:textColor="#000000"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/bg_edittext"
-        android:hint="题目"/>
-    <EditText
-        android:id="@+id/edt_relese_content"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="@drawable/bg_edittext"
-        android:textSize="15sp"
-        android:textColor="#000000"
-        android:hint="内容"
-        android:layout_marginTop="15dp"/>
+        android:src="@drawable/btn_release"
+        android:layout_marginTop="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"/>
 
-    <Button
-        android:id="@+id/btn_item_ly_fatie"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/ic_click_bt"
-        android:textColor="@color/white"
-        android:layout_marginTop="15dp"
-
-        android:text="我要发贴"/>
-
-</LinearLayout>
+</RelativeLayout>
 
 

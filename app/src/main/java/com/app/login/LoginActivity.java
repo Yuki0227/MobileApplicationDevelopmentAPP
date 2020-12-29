@@ -26,6 +26,7 @@ import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.internal.concurrent.Task;
 
 public class LoginActivity extends AppCompatActivity implements Serializable {
 
@@ -125,6 +126,8 @@ public class LoginActivity extends AppCompatActivity implements Serializable {
 
                     //用户登录成功,就根据其id预处理任务列表
                     TaskFactory.getTask(Integer.parseInt(id));
+                    TaskFactory.findAllAssignedTask(Integer.parseInt(id));
+                    TaskFactory.findAllCreatedTask(Integer.parseInt(id));
 
                 } catch (Exception e) {
                     e.printStackTrace();

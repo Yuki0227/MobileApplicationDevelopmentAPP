@@ -58,6 +58,7 @@ dependencies {
     //下拉刷新库
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-22'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
 
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

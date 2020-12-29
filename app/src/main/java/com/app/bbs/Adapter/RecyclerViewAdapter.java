@@ -1,5 +1,6 @@
 package com.app.bbs.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,14 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.app.R;
-import com.app.bbs.entity.Article;
 import com.app.bbs.entity.ArticleView;
 
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private List<ArticleView> itemList;
+    private final List<ArticleView> itemList;
     private OnItemClickListener onItemClickListener = null;
 
     public RecyclerViewAdapter(List<ArticleView> itemList, Context context) {
@@ -31,20 +31,18 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return new ViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull final RecyclerViewAdapter.ViewHolder holder, final int position) {
         ArticleView item = itemList.get(position);
+
         holder.itemName.setText(item.getTitle());
+        holder.itemAuthor.setText("作者:" + item.getAuthor());
         holder.itemLabels.setText(item.getBody());
 
 
         if(null != onItemClickListener){
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onItemClickListener.onClick(holder.itemView,position);
-                }
-            });
+            holder.itemView.setOnClickListener(v -> onItemClickListener.onClick(holder.itemView, position));
         }
 
     }
@@ -65,13 +63,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView itemName;
         public TextView itemLabels;
-        //public BreakIterator discussView;
+        public TextView itemAuthor;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             itemName = itemView.findViewById(R.id.tv_item_name);
             itemLabels = itemView.findViewById(R.id.tv_item_labels);
-
+            itemAuthor = itemView.findViewById(R.id.tv_item_username);
         }
 
 

@@ -31,15 +31,14 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class EmailFragment extends Fragment {
-
-
     private ListView listView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_email, container, false);
-
+        if (MyApplication.getConfig() == null)
+            CommonUtils.showLongMsg(getActivity(), "邮箱功能无法使用，请设置邮箱信息");
         return view;
     }
 
@@ -68,8 +67,6 @@ public class EmailFragment extends Fragment {
                             }
                         });
             }
-        } else {
-            CommonUtils.showLongMsg(getActivity(), "邮箱功能无法使用，请设置邮箱信息");
         }
     }
 
@@ -97,11 +94,21 @@ public class EmailFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+
         Looper.myQueue().addIdleHandler(() -> {
             initLayoutBind();
             initData();
             return false;
         });
 
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            if (MyApplication.getConfig() == null)
+                CommonUtils.showLongMsg(getActivity(), "邮箱功能无法使用，请设置邮箱信息");
+        }
     }
 }

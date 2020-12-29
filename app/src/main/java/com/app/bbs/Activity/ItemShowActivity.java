@@ -2,7 +2,6 @@ package com.app.bbs.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -16,8 +15,8 @@ import com.alibaba.fastjson.JSON;
 import com.app.MyApplication;
 import com.app.R;
 import com.app.bbs.Adapter.DiscussAdapter;
-import com.app.bbs.entity.Article;
 import com.app.bbs.entity.ArticleReview;
+import com.app.bbs.entity.ArticleReviewView;
 import com.app.bbs.entity.ArticleView;
 
 import java.util.List;
@@ -37,8 +36,8 @@ public class ItemShowActivity extends AppCompatActivity {
     private EditText discusscontent;
     private long articleId;
     ArticleView article;
-    private Boolean succed=false;
-    List<ArticleReview> articleReviews;
+    private Boolean succed = false;
+    List<ArticleReviewView> articleReviews;
 
     TextView title, content, username;
 
@@ -74,7 +73,7 @@ public class ItemShowActivity extends AppCompatActivity {
                             .build();
                     Response response = client.newCall(request).execute();
                     String responseData = Objects.requireNonNull(response.body()).string();
-                    articleReviews = JSON.parseArray(responseData, ArticleReview.class);
+                    articleReviews = JSON.parseArray(responseData, ArticleReviewView.class);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -96,8 +95,8 @@ public class ItemShowActivity extends AppCompatActivity {
 
         content = findViewById(R.id.bbs_tv_article);
         title = findViewById(R.id.show_tv_item_title);
-        username=findViewById(R.id.tv_item_username);
-        username.setText(article.getAuthor());
+//        username=findViewById(R.id.tv_item_username);
+//        username.setText(article.getAuthor());
         title.setText(article.getTitle());
         content.setText(article.getBody());
         init_discuss();
@@ -123,60 +122,49 @@ public class ItemShowActivity extends AppCompatActivity {
 
         init();
 
-
         mBtnDiscuss=findViewById(R.id.btn_discuss);
-        mBtnDiscuss.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        mBtnDiscuss.setOnClickListener(v -> {
 
-                discusscontent = findViewById(R.id.edt_discuss_content);
+            discusscontent = findViewById(R.id.edt_discuss_content);
 
-
-
-                Thread putArticleReviewThread = new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            ArticleReview articleReview = new ArticleReview();
-                            articleReview.setArticleId(article.getId());
-                            articleReview.setUserId(MyApplication.getUser().getId());
-                            articleReview.setBody(discusscontent.getText().toString());
-                            MediaType JSON = MediaType.parse("application/json; charset=utf-8");
-                            String json = com.alibaba.fastjson.JSON.toJSONString(articleReview);
-                            OkHttpClient client = new OkHttpClient();
-                            RequestBody body = RequestBody.create(JSON, json);
-                            Request request = new Request.Builder()
-                                    .url("http://8.131.250.250/bbs/putArticleReview")
-                                    .post(body)
-                                    .build();
-                            client.newCall(request).execute();
-                            succed=true;
-                        } catch (Exception e) {
-
-                            e.printStackTrace();
-                        }
-                    }
-                });
-
+            Thread putArticleReviewThread = new Thread(() -> {
                 try {
-                    putArticleReviewThread.start();
-                    putArticleReviewThread.join();
-                } catch (InterruptedException e) {
+                    ArticleReview articleReview = new ArticleReview();
+                    articleReview.setArticleId(article.getId());
+                    articleReview.setUserId(MyApplication.getUser().getId());
+                    articleReview.setBody(discusscontent.getText().toString());
+                    MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+                    String json = com.alibaba.fastjson.JSON.toJSONString(articleReview);
+                    OkHttpClient client = new OkHttpClient();
+                    RequestBody body = RequestBody.create(JSON, json);
+                    Request request = new Request.Builder()
+                            .url("http://8.131.250.250/bbs/putArticleReview")
+                            .post(body)
+                            .build();
+                    client.newCall(request).execute();
+                    succed = true;
+                } catch (Exception e) {
+
                     e.printStackTrace();
-                    //提交失败
-
-
                 }
+            });
 
-                init();
-                discusscontent.setText("");
-                if(succed)
-                {
-                    Toast.makeText(ItemShowActivity.this, "发布成功", Toast.LENGTH_LONG).show();
-                }else Toast.makeText(ItemShowActivity.this, "请先登录", Toast.LENGTH_LONG).show();
-
+            try {
+                putArticleReviewThread.start();
+                putArticleReviewThread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                //提交失败
 
             }
+
+            init();
+            discusscontent.setText("");
+            if (succed) {
+                Toast.makeText(ItemShowActivity.this, "发布成功", Toast.LENGTH_LONG).show();
+            } else Toast.makeText(ItemShowActivity.this, "请先登录", Toast.LENGTH_LONG).show();
+
+
         });
 
     }

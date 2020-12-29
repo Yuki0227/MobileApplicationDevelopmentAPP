@@ -9,9 +9,6 @@ public class Article implements Serializable {
   private String title;
   private String body;
 
-  public long getId() {
-    return id;
-  }
 
   public void setId(long id) {
     this.id = id;

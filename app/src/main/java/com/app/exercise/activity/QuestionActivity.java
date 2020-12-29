@@ -78,6 +78,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     private TextView judgement_tv_que, judgement_tv_you, judgement_tv_answer, judgement_tv_detail;
     private CheckBox judgement_cb_choice1, judgement_cb_choice2;
     private Button exercise_btn_submit;
+    private Integer submit= 0 ;
 
 
     @Override
@@ -313,6 +314,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                 exercise_btn_submit.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        submit =1;
                         Intent intent =new Intent(QuestionActivity.this,SubmitActivity.class);
                         startActivity(intent);
                     }
@@ -436,14 +438,16 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                 Toast.makeText(QuestionActivity.this, "请选择答案", Toast.LENGTH_SHORT).show();
             }
         }else if(question.getType().equals("编程")){
-            Intent intent = getIntent();
-            String submit = intent.getStringExtra("submit");
-            if(!submit.equals(null)){
-                moveCorrect();
+            if(submit == 1){
+                Intent intent = getIntent();
+                String submit = intent.getStringExtra("submit");
+                if(!submit.equals(null)){
+                    moveCorrect();
+                }
+            }else{
+                Toast.makeText(QuestionActivity.this, "请点击提交答案，提交你的答案", Toast.LENGTH_SHORT).show();
             }
-            else {
-                Toast.makeText(QuestionActivity.this, "请选择答案", Toast.LENGTH_SHORT).show();
-            }
+
         }
 
     }
@@ -567,7 +571,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         String mytime = chronometer.getText().toString();
         String mydate = ft.format(date);
-        String title = source + "\n" + "(" + content + ")";
+        String title = source + "\n" + "测试" ;
         //ToolHelper.excuteDB(this, "insert into exam (_id,title,examTime,score,examDate) values (" + Math.random() * 10000 + ",'" + title + "','" + mytime + "'," + score + ",'" + mydate + "')");
         Intent intent = new Intent(this, ResultActivity.class);
         intent.putExtra("score", score + "/" + num);

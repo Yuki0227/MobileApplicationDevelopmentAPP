@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.app.MyApplication;
 import com.app.R;
 import com.app.task.entity.TaskAssign;
+import com.app.util.User;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 
 import java.util.List;
@@ -22,7 +23,6 @@ public class TaskListViewAdapter extends BaseAdapter {
 
     private Context context = null;
     private OnItemClickListener mOnItemClickListener;
-
     public TaskListViewAdapter(Context context) {
         this.context = context;
     }
@@ -42,8 +42,20 @@ public class TaskListViewAdapter extends BaseAdapter {
     public int getCount() {
         //根据对象的个数进行返回其值
         if(MyApplication.getUser() != null){
-            if(TaskFactory.getTask(MyApplication.getUser().getId()) != null)
-                return TaskFactory.getTask(MyApplication.getUser().getId()).size();
+            User user = MyApplication.getUser();
+            if(TaskFragment.search_mode == 0){
+                if(TaskFactory.getTask(user.getId()) != null){
+                    return TaskFactory.getTask(user.getId()).size();
+                }
+            }else if(TaskFragment.search_mode == 1){
+                if(TaskFactory.findAllCreatedTask(user.getId()) != null){
+                    return TaskFactory.findAllCreatedTask(user.getId()).size();
+                }
+            }else if(TaskFragment.search_mode == 2){
+                if(TaskFactory.findAllAssignedTask(user.getId()) != null){
+                    return TaskFactory.findAllAssignedTask(user.getId()).size();
+                }
+            }
         }
         return 0;
         //return TaskFactory.getTask().size();
@@ -52,9 +64,20 @@ public class TaskListViewAdapter extends BaseAdapter {
     @Override
     public Object getItem(int position) {
         if(MyApplication.getUser() != null){
-            if(TaskFactory.getTask(MyApplication.getUser().getId()) != null ){
-                if(TaskFactory.getTask(MyApplication.getUser().getId()).size() > 0){
-                    return TaskFactory.getTask(MyApplication.getUser().getId()).get(position);
+            User user = MyApplication.getUser();
+            if(TaskFactory.getTask(user.getId()) != null ){
+                if(TaskFragment.search_mode == 0){
+                    if(TaskFactory.getTask(user.getId()) != null){
+                        return TaskFactory.getTask(user.getId()).get(position);
+                    }
+                }else if(TaskFragment.search_mode == 1){
+                    if(TaskFactory.findAllCreatedTask(user.getId()) != null){
+                        return TaskFactory.findAllCreatedTask(user.getId()).get(position);
+                    }
+                }else if(TaskFragment.search_mode == 2){
+                    if(TaskFactory.findAllAssignedTask(user.getId()) != null){
+                        return TaskFactory.findAllAssignedTask(user.getId()).get(position);
+                    }
                 }
             }
         }
@@ -85,7 +108,15 @@ public class TaskListViewAdapter extends BaseAdapter {
 
 
         if(MyApplication.getUser() != null){
-            List<TaskAssign> taskAssignList = TaskFactory.getTask(MyApplication.getUser().getId());
+            List<TaskAssign> taskAssignList = null;
+            User user = MyApplication.getUser();
+            if(TaskFragment.search_mode == 0){
+                taskAssignList = TaskFactory.getTask(user.getId());
+            }else if(TaskFragment.search_mode == 1){
+                taskAssignList = TaskFactory.findAllCreatedTask(user.getId());
+            }else if(TaskFragment.search_mode == 2){
+                taskAssignList = TaskFactory.findAllAssignedTask(user.getId());
+            }
             if(taskAssignList != null || taskAssignList.size() > 0){
                 TaskAssign taskAssign = taskAssignList.get(position);
                 String task_title = taskAssign.getTaskTitle();
@@ -124,6 +155,15 @@ public class TaskListViewAdapter extends BaseAdapter {
                     TaskAssign taskAssign = MyApplication.getTaskList().get(position);
                     taskAssign.setStatus(1);        //将它的状态设为1,表示该任务已经完成
                     TaskFactory.updateTask(taskAssign); //调用方法去更新该任务
+                    //更新后更新任务集合
+                    Integer userId = MyApplication.getUser().getId();
+                    if(TaskFragment.search_mode == 0){
+                        TaskFactory.getTask(userId);
+                    }else if(TaskFragment.search_mode == 1){
+                        TaskFactory.findAllCreatedTask(userId);
+                    }else if(TaskFragment.search_mode == 2){
+                        TaskFactory.findAllAssignedTask(userId);
+                    }
                     mOnItemClickListener.onItemClick(mHolder.iv_done,position);
                 }
             });
@@ -131,11 +171,20 @@ public class TaskListViewAdapter extends BaseAdapter {
             mHolder.iv_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Integer taskId = TaskFactory.getTask(MyApplication.getUser().getId()).get(position).getId();
-                    TaskFactory.getTask(MyApplication.getUser().getId()).remove(position);
+                    Integer userId = MyApplication.getUser().getId();
+                    Integer taskId = MyApplication.getTaskList().get(position).getId();
+                    //Integer taskId = TaskFactory.getTask(MyApplication.getUser().getId()).get(position).getId();
+                    //TaskFactory.getTask(MyApplication.getUser().getId()).remove(position);
                     TaskFactory.deleteTask(taskId);
                     //删除后更新任务集合
-                    TaskFactory.getTask(MyApplication.getUser().getId());
+                    if(TaskFragment.search_mode == 0){
+                        TaskFactory.getTask(userId);
+                    }else if(TaskFragment.search_mode == 1){
+                        TaskFactory.findAllCreatedTask(userId);
+                    }else if(TaskFragment.search_mode == 2){
+                        TaskFactory.findAllAssignedTask(userId);
+                    }
+                    //TaskFactory.getTask(MyApplication.getUser().getId());
                     //TaskFactory.getTask().remove(position);
                     Toast.makeText(context, "iv_delete" + position, Toast.LENGTH_SHORT).show();
                     mOnItemClickListener.onItemClick(mHolder.iv_delete,position);

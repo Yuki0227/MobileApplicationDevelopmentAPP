@@ -140,10 +140,10 @@ public class TaskFactory {
             public void run() {
                 try {
                     FormBody.Builder params = new FormBody.Builder();
-                    params.add("creatorId", userId+"");
+                    params.add("id", userId+"");
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
-                            .url("http://8.131.250.250/taskAssign/findAll")
+                            .url("http://8.131.250.250/taskAssign/findAllTask")
                             .post(params.build())
                             .build();
                     Response response = client.newCall(request).execute();
@@ -216,14 +216,14 @@ public class TaskFactory {
                     //将JSON字符串转换成对象链表(这个地方有待进一步测试)
                     List<TaskAssign> taskAssignList = new ArrayList<TaskAssign>();
                     taskAssignList = JSON.parseArray(responseData,TaskAssign.class);
-                    MyApplication.setAllAssignedTask(taskAssignList);
+                    MyApplication.setTaskList(taskAssignList);
                 } catch (Exception e) {
-                    MyApplication.setAllAssignedTask(null);
+                    MyApplication.setTaskList(null);
                     e.printStackTrace();
                 }
             }
         }).start();
-        return MyApplication.getAllAssignedTask();
+        return MyApplication.getTaskList();
     }
 
     //根据用户id来返回创建者是它的所有任务
@@ -245,14 +245,14 @@ public class TaskFactory {
                     //将JSON字符串转换成对象链表(这个地方有待进一步测试)
                     List<TaskAssign> taskAssignList = new ArrayList<TaskAssign>();
                     taskAssignList = JSON.parseArray(responseData,TaskAssign.class);
-                    MyApplication.setAllCreatedTask(taskAssignList);
+                    MyApplication.setTaskList(taskAssignList);
                 } catch (Exception e) {
-                    MyApplication.setAllCreatedTask(null);
+                    MyApplication.setTaskList(null);
                     e.printStackTrace();
                 }
             }
         }).start();
-        return MyApplication.getAllCreatedTask();
+        return MyApplication.getTaskList();
     }
 
 

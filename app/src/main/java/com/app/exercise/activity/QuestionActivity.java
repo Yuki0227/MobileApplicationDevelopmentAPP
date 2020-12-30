@@ -434,9 +434,6 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             }
         }else if(question.getType().equals("编程")){
             if(submit == 1){
-                Intent intent = getIntent();
-                String submit = intent.getStringExtra("submit");
-                if(!submit.equals(null)){
                     moveCorrect();
                 }
             }else{
@@ -445,7 +442,6 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
 
         }
 
-    }
 
     //移除正确题目
     @SuppressLint("SetTextI18n")

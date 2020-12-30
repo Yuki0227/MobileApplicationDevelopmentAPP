@@ -7,13 +7,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/blue"
-            android:padding="8dp"
-            android:text="Description" />
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/exercise_btn_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/blue"
+                android:text="提交答案" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/blue"
+                android:padding="8dp"
+                android:text="Description" />
+
+        </LinearLayout>
+
 
         <TextView
             android:id="@+id/exercise_program_tv_que"
@@ -74,12 +88,6 @@
             android:padding="8dp" />
 
 
-        <Button
-            android:id="@+id/exercise_btn_submit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/blue"
-            android:text="提交答案" />
 
 
     </LinearLayout>

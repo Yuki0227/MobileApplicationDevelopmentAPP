@@ -266,12 +266,13 @@ public class TaskFragment extends Fragment {
                         TaskAssign taskAssign = taskAssignList.get(position);
                         if(status == 0){
                             //未完成状态下点击它时会跳转到扫码界面,扫码成功后状态变成已完成,否则仍为未完成状态
-                            //跳转到扫码页面(暂未实现)
-                            /*......*/
-                            taskAssign.setStatus(1);
-                            TaskFactory.updateTask(taskAssign);
-                            ((ImageView)view).setImageResource(R.mipmap.ic_task_complete);
-                            CommonUtils.showShortMsg(getContext(),"已完成");
+                            //跳转到扫码页面
+                            Intent intent = new Intent(getActivity(),ScanCodeActivity.class);
+                            Bundle bundle = new Bundle();
+                            bundle.putInt("position",position);
+                            bundle.putInt("taskId", taskAssign.getId());
+                            intent.putExtras(bundle);
+                            startActivity(intent);
                         }else{
                             //已完成状态下再点击它时会取消已完成状态
                             taskAssign.setStatus(0);

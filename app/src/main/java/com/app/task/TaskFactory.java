@@ -97,6 +97,8 @@ public class TaskFactory {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                //更新任务列表
+                getTask(MyApplication.getUser().getId());
             }
         }).start();
     }

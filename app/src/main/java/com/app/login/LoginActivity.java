@@ -122,11 +122,6 @@ public class LoginActivity extends AppCompatActivity implements Serializable {
                     MyApplication.setUser(Integer.parseInt(id), name, "");
                     loginSucceed = true;
 
-                    //用户登录成功,就根据其id预处理任务列表
-                    TaskFactory.getTask(Integer.parseInt(id));
-                    TaskFactory.findAllAssignedTask(Integer.parseInt(id));
-                    TaskFactory.findAllCreatedTask(Integer.parseInt(id));
-
                 } catch (Exception e) {
                     e.printStackTrace();
 

@@ -135,9 +135,8 @@ public class TaskFactory {
     }
 
 
-    //根据用户id来获得其所拥有的任务
-    public static List<TaskAssign> getTask(Integer userId){
-        new Thread(new Runnable() {
+    public static Thread getTaskThread(Integer userId){
+        return new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -156,7 +155,7 @@ public class TaskFactory {
                     //将json转成TaskAssign对象
                     //JSONArray jsonArray = jsonObj.optJSONArray("jsonArray");
                     List<TaskAssign> tmp = new ArrayList<TaskAssign>();
-                 //   System.out.println("jsonArray --> " + jsonArray);
+                    //   System.out.println("jsonArray --> " + jsonArray);
                     if(jsonArray != null && jsonArray.length() > 0){
                         for(int i = 0; i < jsonArray.length(); i++){
                             JSONObject ans = jsonArray.getJSONObject(i);
@@ -196,13 +195,22 @@ public class TaskFactory {
                     MyApplication.setTaskList(null);
                 }
             }
-        }).start();
+        });
+    }
+    public static List<TaskAssign> getTask(Integer userId){
+        Thread getAllTask = getTaskThread(userId);
+        try{
+            getAllTask.start();
+            getAllTask.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return MyApplication.getTaskList();
     }
 
-    //根据用户id来返回被指派者是它的所有任务
-    public static List<TaskAssign> findAllAssignedTask(Integer userId){
-        new Thread(new Runnable() {
+
+    public static Thread findAllAssignedTaskThread(Integer userId){
+        return new Thread(new Runnable() {
             @Override
             public void run() {
                 try{
@@ -225,13 +233,21 @@ public class TaskFactory {
                     e.printStackTrace();
                 }
             }
-        }).start();
+        });
+    }
+    public static List<TaskAssign> findAllAssignedTask(Integer userId){
+        Thread findAssignTask = findAllAssignedTaskThread(userId);
+        try{
+            findAssignTask.start();
+            findAssignTask.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return MyApplication.getTaskList();
     }
 
-    //根据用户id来返回创建者是它的所有任务
-    public static List<TaskAssign> findAllCreatedTask(Integer userId){
-        new Thread(new Runnable() {
+    public static Thread findAllCreatedTaskThread(Integer userId){
+        return new Thread(new Runnable() {
             @Override
             public void run() {
                 try{
@@ -254,7 +270,16 @@ public class TaskFactory {
                     e.printStackTrace();
                 }
             }
-        }).start();
+        });
+    }
+    public static List<TaskAssign> findAllCreatedTask(Integer userId){
+        Thread findCreatedTask = findAllCreatedTaskThread(userId);
+        try{
+            findCreatedTask.start();
+            findCreatedTask.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return MyApplication.getTaskList();
     }
 

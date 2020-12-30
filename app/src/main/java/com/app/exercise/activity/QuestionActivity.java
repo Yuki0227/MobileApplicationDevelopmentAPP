@@ -1,12 +1,10 @@
 package com.app.exercise.activity;
 
 import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -159,13 +157,10 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         chronometer = findViewById(R.id.exercise_mytime);
         chronometer.setBase(SystemClock.elapsedRealtime());
         chronometer.start();
-        chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
-            @Override
-            public void onChronometerTick(Chronometer chronometer) {
-                if (SystemClock.elapsedRealtime() - chronometer.getBase() >= 1.5*360* 1000) {
-                    Toast.makeText(QuestionActivity.this, "考试时间到", Toast.LENGTH_LONG).show();
-                    saveExam();
-                }
+        chronometer.setOnChronometerTickListener(chronometer -> {
+            if (SystemClock.elapsedRealtime() - chronometer.getBase() >= 1.5 * 360 * 1000) {
+                Toast.makeText(QuestionActivity.this, "考试时间到", Toast.LENGTH_LONG).show();
+                saveExam();
             }
         });
         //获取题目集关键字
@@ -236,7 +231,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             Question question = testPaper.getQuestion(pos);
             if (question.getType().equals("单选") || question.getType().equals("多选")) {
                 ChoiceQuestion choiceQuestion = (ChoiceQuestion) question;
-                Log.e("a", choiceQuestion.getQue());
+
                 root = LayoutInflater.from(QuestionActivity.this).inflate(R.layout.exercise_que_item, null);
                 tvQue = root.findViewById(R.id.exercise_tv_que1);
                 cb1 = root.findViewById(R.id.exercise_cb_choice1);
@@ -532,12 +527,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                         AlertDialog.Builder builder = new AlertDialog.Builder(this);
                         builder.setMessage("是否结束测试？");
                         builder.setNegativeButton("取消", null);
-                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                saveExam();
-                            }
-                        });
+                        builder.setPositiveButton("确定", (dialog, which) -> saveExam());
                         builder.show();
                     }
                 } else {
@@ -547,17 +537,9 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             case android.R.id.home://返回
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setTitle("是否取消测试？");
-                builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                    }
+                builder.setNegativeButton("取消", (dialog, which) -> {
                 });
-                builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        QuestionActivity.this.finish();
-                    }
-                });
+                builder.setPositiveButton("确定", (dialog, which) -> QuestionActivity.this.finish());
                 builder.show();
                 break;
         }

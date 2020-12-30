@@ -23,8 +23,12 @@ public class TaskListViewAdapter extends BaseAdapter {
 
     private Context context = null;
     private OnItemClickListener mOnItemClickListener;
-    public TaskListViewAdapter(Context context) {
+    private List<TaskAssign> mList;
+
+    public TaskListViewAdapter(Context context, List<TaskAssign> list) {
         this.context = context;
+        this.mList = list;
+        //System.out.println("TaskListViewAdapter --> " + this.mList);
     }
 
     public interface OnItemClickListener{
@@ -40,49 +44,18 @@ public class TaskListViewAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        //根据对象的个数进行返回其值
-        if(MyApplication.getUser() != null){
-            User user = MyApplication.getUser();
-            if(TaskFragment.search_mode == 0){
-                if(TaskFactory.getTask(user.getId()) != null){
-                    return TaskFactory.getTask(user.getId()).size();
-                }
-            }else if(TaskFragment.search_mode == 1){
-                if(TaskFactory.findAllCreatedTask(user.getId()) != null){
-                    return TaskFactory.findAllCreatedTask(user.getId()).size();
-                }
-            }else if(TaskFragment.search_mode == 2){
-                if(TaskFactory.findAllAssignedTask(user.getId()) != null){
-                    return TaskFactory.findAllAssignedTask(user.getId()).size();
-                }
-            }
+        if(mList == null){
+            return 0;
         }
-        return 0;
-        //return TaskFactory.getTask().size();
+        return mList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        if(MyApplication.getUser() != null){
-            User user = MyApplication.getUser();
-            if(TaskFactory.getTask(user.getId()) != null ){
-                if(TaskFragment.search_mode == 0){
-                    if(TaskFactory.getTask(user.getId()) != null){
-                        return TaskFactory.getTask(user.getId()).get(position);
-                    }
-                }else if(TaskFragment.search_mode == 1){
-                    if(TaskFactory.findAllCreatedTask(user.getId()) != null){
-                        return TaskFactory.findAllCreatedTask(user.getId()).get(position);
-                    }
-                }else if(TaskFragment.search_mode == 2){
-                    if(TaskFactory.findAllAssignedTask(user.getId()) != null){
-                        return TaskFactory.findAllAssignedTask(user.getId()).get(position);
-                    }
-                }
-            }
+        if(mList == null){
+            return null;
         }
-        return null;
-        //return TaskFactory.getTask().get(position);
+        return mList.get(position);
     }
 
     @Override
@@ -106,50 +79,20 @@ public class TaskListViewAdapter extends BaseAdapter {
             mHolder = (ViewHolder) convertView.getTag();
         }
 
-
-        if(MyApplication.getUser() != null){
-            List<TaskAssign> taskAssignList = null;
-            User user = MyApplication.getUser();
-            if(TaskFragment.search_mode == 0){
-                taskAssignList = TaskFactory.getTask(user.getId());
-            }else if(TaskFragment.search_mode == 1){
-                taskAssignList = TaskFactory.findAllCreatedTask(user.getId());
-            }else if(TaskFragment.search_mode == 2){
-                taskAssignList = TaskFactory.findAllAssignedTask(user.getId());
-            }
-            if(taskAssignList != null || taskAssignList.size() > 0){
-                TaskAssign taskAssign = taskAssignList.get(position);
-                String task_title = taskAssign.getTaskTitle();
-                mHolder.tv_title.setText(task_title);
-                if(taskAssign.getTaskContent() != null && !taskAssign.getTaskContent().isEmpty()){
-                    String task_content = taskAssign.getTaskContent();
-                    mHolder.tv_content.setText(task_content);
-                }
-            }
-        }
-
-
-        /*下面这块代码仅做测试用,具体如何写根据实际需求来
-        String title = TaskFactory.getTask().get(position).get("username").toString();
-        String content = TaskFactory.getTask().get(position).get("password").toString();
-        mHolder.tv_title.setText(title);
-        mHolder.tv_content.setText(content);
-
-        if(MyApplication.getUser() != null){
-            List<TaskAssign> task = TaskFactory.getTask(MyApplication.getUser().getId());
-            System.out.println("你已经登录了,你的任务是");
-            //System.out.println(task);
+        mHolder.tv_title.setText(mList.get(position).getTaskTitle());
+        mHolder.tv_content.setText(mList.get(position).getTaskContent());
+        if(mList.get(position).getStatus() == 0){
+            mHolder.iv_done.setImageResource(R.mipmap.ic_task_not_complete);
         }else{
-            Toast.makeText(context, "你还未登录", Toast.LENGTH_SHORT).show();
+            mHolder.iv_done.setImageResource(R.mipmap.ic_task_complete);
         }
-
-         */
 
 
         if(mOnItemClickListener != null){
             mHolder.iv_done.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    /*
                     Toast.makeText(context, "iv_done" + position, Toast.LENGTH_SHORT).show();
                     mHolder.iv_done.setImageResource(R.mipmap.ic_task_complete);
                     TaskAssign taskAssign = MyApplication.getTaskList().get(position);
@@ -164,6 +107,7 @@ public class TaskListViewAdapter extends BaseAdapter {
                     }else if(TaskFragment.search_mode == 2){
                         TaskFactory.findAllAssignedTask(userId);
                     }
+                     */
                     mOnItemClickListener.onItemClick(mHolder.iv_done,position);
                 }
             });
@@ -171,45 +115,10 @@ public class TaskListViewAdapter extends BaseAdapter {
             mHolder.iv_delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Integer userId = MyApplication.getUser().getId();
-                    Integer taskId = MyApplication.getTaskList().get(position).getId();
-                    //Integer taskId = TaskFactory.getTask(MyApplication.getUser().getId()).get(position).getId();
-                    //TaskFactory.getTask(MyApplication.getUser().getId()).remove(position);
-                    TaskFactory.deleteTask(taskId);
-                    //删除后更新任务集合
-                    if(TaskFragment.search_mode == 0){
-                        TaskFactory.getTask(userId);
-                    }else if(TaskFragment.search_mode == 1){
-                        TaskFactory.findAllCreatedTask(userId);
-                    }else if(TaskFragment.search_mode == 2){
-                        TaskFactory.findAllAssignedTask(userId);
-                    }
-                    //TaskFactory.getTask(MyApplication.getUser().getId());
-                    //TaskFactory.getTask().remove(position);
-                    Toast.makeText(context, "iv_delete" + position, Toast.LENGTH_SHORT).show();
                     mOnItemClickListener.onItemClick(mHolder.iv_delete,position);
                 }
             });
         }
-
-        /*
-        mHolder.iv_done.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "iv_done" + position, Toast.LENGTH_SHORT).show();
-                mHolder.iv_done.setImageResource(R.mipmap.ic_task_complete);
-            }
-        });
-
-        mHolder.iv_delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TaskFactory.getTask().remove(position);
-                Toast.makeText(context, "iv_delete" + position, Toast.LENGTH_SHORT).show();
-
-            }
-        });
-         */
 
         return convertView;
     }

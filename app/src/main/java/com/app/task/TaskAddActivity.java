@@ -80,11 +80,12 @@ public class TaskAddActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(task_title.getText() == null || task_title.getText().toString().isEmpty() || task_assign_username.getText().toString().isEmpty()){
-                    CommonUtils.showShortMsg(v.getContext(),"修改失败,未填写任务标题或未指派人员");
+                    CommonUtils.showShortMsg(v.getContext(),"添加失败,未填写任务标题或未指派人员");
                 }else{
                     TaskAssign taskAssign = new TaskAssign();
                     taskAssign.setCreatorId(MyApplication.getUser().getId());
                     taskAssign.setTaskTitle(task_title.getText().toString());
+                    taskAssign.setStatus(0);
                     if(task_content.getText() != null){
                         taskAssign.setTaskContent(task_content.getText().toString());
                     }
@@ -102,6 +103,7 @@ public class TaskAddActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                             CommonUtils.showShortMsg(v.getContext(),"添加成功");
+
                             finish();
                         }
                     });

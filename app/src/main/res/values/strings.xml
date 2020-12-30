@@ -10,4 +10,16 @@
     <string name="add_todo_submit">添加</string>
     <string name="add_todo_update">更新</string>
 
+    <string name="barcode_content">码内容：</string>
+    <string name="barcode_width">码宽度：</string>
+    <string name="width_value">700</string>
+    <string name="barcode_height">码高度：</string>
+    <string name="height_value">700</string>
+    <string name="barcode_type">码类型</string>
+    <string name="barcode_margin">边距：</string>
+    <string name="barcode_color">颜色</string>
+    <string name="barcode_backgroundcolor">背景色</string>
+    <string name="generate_barcode">生成码</string>
+    <string name="save_barcode">保存码</string>
+
 </resources>

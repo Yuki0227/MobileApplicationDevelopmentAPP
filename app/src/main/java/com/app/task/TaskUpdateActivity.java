@@ -2,6 +2,7 @@ package com.app.task;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,9 +26,11 @@ public class TaskUpdateActivity extends AppCompatActivity {
     private Spinner update_spinner;
     private TextView task_update_username;
     private TextView btn_task_update;
+    private TextView btn_task_generate_code;
     private EditText et_title_update;
     private EditText et_content_update;
     TaskListViewAdapter taskListViewAdapter;
+    private int task_position;
 
     private static final String Tag = "Task";
     @Override
@@ -39,12 +42,14 @@ public class TaskUpdateActivity extends AppCompatActivity {
         update_spinner = findViewById(R.id.task_update_spinner);
         task_update_username = findViewById(R.id.task_update_username);
         btn_task_update = findViewById(R.id.btn_task_update);
+        btn_task_generate_code = findViewById(R.id.btn_task_generate_code);
         et_title_update = findViewById(R.id.et_title_update);
         et_content_update = findViewById(R.id.et_content_update);
 
         //获取任务的内容
         Bundle bundle = getIntent().getExtras();
         int position = bundle.getInt("position");
+        task_position = bundle.getInt("position");
         String str_title = bundle.getString("task_title");
         String str_content = bundle.getString("task_content");
         int assigneeId = bundle.getInt("assigneeId");
@@ -118,6 +123,20 @@ public class TaskUpdateActivity extends AppCompatActivity {
                         }
                     });
                 }
+            }
+        });
+
+        btn_task_generate_code.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<TaskAssign> taskAssignList = TaskFactory.getTask(MyApplication.getUser().getId());
+                TaskAssign taskAssign = taskAssignList.get(position);
+                Integer taskId = taskAssign.getId();
+                Intent intent = new Intent(TaskUpdateActivity.this,GenerateActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt("taskId", taskId);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
 

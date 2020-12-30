@@ -20,7 +20,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".task.ScanCodeActivity"></activity>
+        <activity android:name=".task.GenerateActivity"></activity>
+        <activity android:name=".task.ScanCodeActivity" />
         <activity android:name=".exercise.activity.HistoryActivity" />
         <activity android:name=".exercise.activity.SubmitActivity" />
         <activity android:name=".bbs.Activity.ReleaseActivity" />

@@ -109,7 +109,12 @@ public class TaskFragment extends Fragment {
                         search_mode = 0;
                         //List<TaskAssign> taskAssignList = TaskFactory.getTask(MyApplication.getUser().getId());
                         //MyApplication.setTaskList(taskAssignList);
-                        TaskFactory.getTask(MyApplication.getUser().getId());
+                        /*
+                        taskAssignList.clear();
+                        taskAssignList.addAll(TaskFactory.getTask(MyApplication.getUser().getId()));
+                         */
+                        initLayoutBind();
+                        initData();
                         //通知更新listview
                         taskListViewAdapter.notifyDataSetChanged();
                         break;
@@ -123,7 +128,13 @@ public class TaskFragment extends Fragment {
                         search_mode = 1;
                         //List<TaskAssign> taskAssignList1 = TaskFactory.findAllCreatedTask(MyApplication.getUser().getId());
                         //MyApplication.setTaskList(taskAssignList1);
-                        TaskFactory.findAllCreatedTask(MyApplication.getUser().getId());
+                        /*
+                        taskAssignList.clear();
+                        taskAssignList.addAll(TaskFactory.findAllCreatedTask(MyApplication.getUser().getId()));
+
+                         */
+                        initLayoutBind();
+                        initData();
                         //通知更新listview
                         taskListViewAdapter.notifyDataSetChanged();
                         break;
@@ -137,7 +148,13 @@ public class TaskFragment extends Fragment {
                         search_mode = 2;
                         //List<TaskAssign> taskAssignList2 = TaskFactory.findAllAssignedTask(MyApplication.getUser().getId());
                         //MyApplication.setTaskList(taskAssignList2);
-                        TaskFactory.findAllAssignedTask(MyApplication.getUser().getId());
+                        /*
+                        taskAssignList.clear();
+                        taskAssignList.addAll(TaskFactory.findAllAssignedTask(MyApplication.getUser().getId()));
+
+                         */
+                        initLayoutBind();
+                        initData();
                         //通知更新listview
                         taskListViewAdapter.notifyDataSetChanged();
                         break;
@@ -167,6 +184,8 @@ public class TaskFragment extends Fragment {
 
     @Override
     public void onResume() {
+        System.out.println("search_mode --> " + search_mode);
+
         super.onResume();
         if(MyApplication.getUser() == null) return ;
         Looper.myQueue().addIdleHandler(() -> {
@@ -212,16 +231,18 @@ public class TaskFragment extends Fragment {
         //if(MyApplication.getUser() == null) return ;
         //创建数据源
         taskAssignList = new ArrayList<TaskAssign>();
-        System.out.println("TaskFactory --> " + TaskFactory.getTask(MyApplication.getUser().getId()));
         if(search_mode == 0 && TaskFactory.getTask(MyApplication.getUser().getId()) != null){
             //taskAssignList = TaskFactory.getTask(MyApplication.getUser().getId());
             taskAssignList.addAll(TaskFactory.getTask(MyApplication.getUser().getId()));
+            Log.d("allTask --> " , TaskFactory.getTask(MyApplication.getUser().getId()).toString());
         }else if(search_mode == 1 && TaskFactory.findAllCreatedTask(MyApplication.getUser().getId()) != null){
             //taskAssignList = TaskFactory.findAllCreatedTask(MyApplication.getUser().getId());
             taskAssignList.addAll(TaskFactory.findAllCreatedTask(MyApplication.getUser().getId()));
+            Log.d("createdTask --> " , TaskFactory.findAllCreatedTask(MyApplication.getUser().getId()).toString());
         }else if(search_mode == 2 && TaskFactory.findAllAssignedTask(MyApplication.getUser().getId()) != null){
             //taskAssignList = TaskFactory.findAllAssignedTask(MyApplication.getUser().getId());
             taskAssignList.addAll(TaskFactory.findAllAssignedTask(MyApplication.getUser().getId()));
+            Log.d("assigneedTask --> " , TaskFactory.findAllAssignedTask(MyApplication.getUser().getId()).toString());
         }
         taskListViewAdapter = new TaskListViewAdapter(getContext(), taskAssignList);
         listView.setAdapter(taskListViewAdapter);

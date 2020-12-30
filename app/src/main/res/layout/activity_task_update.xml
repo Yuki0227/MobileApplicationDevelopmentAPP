@@ -61,12 +61,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
                 android:text="指派给"
                 android:textSize="16sp"/>
             <TextView
                 android:id="@+id/task_update_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
                 android:text="张三"
                 android:textSize="16sp"/>
         </LinearLayout>
@@ -94,7 +96,7 @@
         android:text="@string/add_todo_update"
         android:textColor="@color/color_widget"
         android:textSize="@dimen/sp_16"
-        android:background="@color/color_main" />
+        android:background="@drawable/ic_click_bt" />
 
 
 </LinearLayout>

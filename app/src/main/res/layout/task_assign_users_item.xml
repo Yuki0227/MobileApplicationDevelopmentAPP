@@ -7,7 +7,7 @@
         android:id="@+id/users_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/dp_25"
+        android:textSize="16sp"
         android:text="张三"/>
 
 

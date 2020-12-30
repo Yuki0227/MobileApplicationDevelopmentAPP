@@ -76,11 +76,21 @@
             <EditText
                 android:id="@+id/edt_discuss_content"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dp"
+                android:paddingLeft="6dp"
                 android:background="@drawable/bg_edittext"
+                android:textSize="15sp"
+                android:textColor="#000000"
+                android:inputType="textMultiLine"
+                android:gravity="top"
                 android:layout_marginRight="10dp"
                 android:layout_marginLeft="10dp"
-                android:layout_below="@+id/bbs_tv_article_myreview"/>
+
+                android:layout_below="@+id/bbs_tv_article_myreview"
+                android:minLines="4"
+                android:maxLines="4"
+                android:scrollbars="vertical"/>
             <Button
                 android:id="@+id/btn_discuss"
                 android:layout_width="300dp"

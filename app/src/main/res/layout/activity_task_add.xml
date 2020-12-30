@@ -61,19 +61,26 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
                 android:text="指派给"
                 android:textSize="16sp"/>
             <TextView
                 android:id="@+id/task_assign_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:textSize="16sp"/>
         </LinearLayout>
 
         <Spinner
             android:id="@+id/task_assign_spinner"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:dropDownHorizontalOffset="-50dp"
+            android:dropDownVerticalOffset="72dp"
+            android:paddingLeft="8dp"
+
+            />
     </LinearLayout>
 
     <View
@@ -94,7 +101,7 @@
         android:text="@string/add_todo_submit"
         android:textColor="@color/color_widget"
         android:textSize="@dimen/sp_16"
-        android:background="@color/color_main" />
+        android:background="@drawable/ic_click_bt" />
 
 
 </LinearLayout>

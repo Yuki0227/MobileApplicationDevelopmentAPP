@@ -92,22 +92,6 @@ public class TaskListViewAdapter extends BaseAdapter {
             mHolder.iv_done.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*
-                    Toast.makeText(context, "iv_done" + position, Toast.LENGTH_SHORT).show();
-                    mHolder.iv_done.setImageResource(R.mipmap.ic_task_complete);
-                    TaskAssign taskAssign = MyApplication.getTaskList().get(position);
-                    taskAssign.setStatus(1);        //将它的状态设为1,表示该任务已经完成
-                    TaskFactory.updateTask(taskAssign); //调用方法去更新该任务
-                    //更新后更新任务集合
-                    Integer userId = MyApplication.getUser().getId();
-                    if(TaskFragment.search_mode == 0){
-                        TaskFactory.getTask(userId);
-                    }else if(TaskFragment.search_mode == 1){
-                        TaskFactory.findAllCreatedTask(userId);
-                    }else if(TaskFragment.search_mode == 2){
-                        TaskFactory.findAllAssignedTask(userId);
-                    }
-                     */
                     mOnItemClickListener.onItemClick(mHolder.iv_done,position);
                 }
             });

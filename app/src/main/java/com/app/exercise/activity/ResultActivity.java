@@ -58,9 +58,8 @@ public class ResultActivity extends AppCompatActivity {
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent1=new Intent(ResultActivity.this,ExamActivity.class);
-//                startActivity(intent1);
-                finish();
+                Intent intent1=new Intent(ResultActivity.this,HistoryActivity.class);
+                startActivity(intent1);
             }
         });
     }

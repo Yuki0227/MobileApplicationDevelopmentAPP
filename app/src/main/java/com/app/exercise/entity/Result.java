@@ -1,6 +1,8 @@
 package com.app.exercise.entity;
 
-public class Result {
+import java.io.Serializable;
+
+public class Result implements Serializable {
 
     private long id;
     private String title;

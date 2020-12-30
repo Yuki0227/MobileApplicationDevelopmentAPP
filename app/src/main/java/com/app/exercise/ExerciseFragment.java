@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.app.R;
+import com.app.exercise.activity.HistoryActivity;
 import com.app.exercise.activity.ResultActivity;
 import com.app.exercise.activity.SettingActivity;
 
@@ -42,7 +43,7 @@ public class ExerciseFragment extends Fragment {
         btn_history = view.findViewById(R.id.exercise_btn_history);
 
         btn_do.setOnClickListener(v -> startActivity(new Intent(getActivity(), SettingActivity.class)));
-        btn_history.setOnClickListener(v -> startActivity(new Intent(getActivity(), ResultActivity.class)));
+        btn_history.setOnClickListener(v -> startActivity(new Intent(getActivity(), HistoryActivity.class)));
 
         return view;
     }

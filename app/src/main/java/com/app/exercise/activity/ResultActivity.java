@@ -2,6 +2,7 @@ package com.app.exercise.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.app.R;
+
+import org.json.JSONObject;
+
+import java.util.Objects;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 
 public class ResultActivity extends AppCompatActivity {
@@ -43,6 +53,7 @@ public class ResultActivity extends AppCompatActivity {
         tvDate.append(date);
         tvTime.append(time);
         setTitle("测试成绩");
+        result();
         bt = findViewById(R.id.exercise_result_bt_record);
         bt.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,6 +63,31 @@ public class ResultActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    private void result(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    FormBody.Builder params = new FormBody.Builder();
+                    params.add("title", title);
+                    params.add("date", date);
+                    params.add("time", time);
+                    params.add("score", score);
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder()
+                            .url("http://8.131.250.250/result/add")
+                            .post(params.build())
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String responseData = Objects.requireNonNull(response.body()).string();
+                    Log.d("responseData", responseData);
+                    JSONObject jsonObj = new JSONObject(responseData);
+                }catch (Exception e){
+                    e.printStackTrace();;
+                }
+            }
+        }).start();
     }
 
 

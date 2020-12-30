@@ -17,7 +17,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".exercise.activity.SubmitActivity"></activity>
+        <activity android:name=".exercise.activity.HistoryActivity"></activity>
+        <activity android:name=".exercise.activity.SubmitActivity" />
         <activity android:name=".bbs.Activity.ReleaseActivity" />
         <activity android:name=".task.TaskUpdateActivity" />
         <activity android:name=".bbs.Activity.ItemShowActivity" />

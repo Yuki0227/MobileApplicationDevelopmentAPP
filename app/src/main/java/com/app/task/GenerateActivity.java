@@ -193,6 +193,7 @@ public class GenerateActivity extends AppCompatActivity {
         } catch (Exception e) {
             Log.w(TAG, Objects.requireNonNull(e.getMessage()));
             Toast.makeText(GenerateActivity.this, "Unkown Error", Toast.LENGTH_SHORT).show();
+
         }
 
     }

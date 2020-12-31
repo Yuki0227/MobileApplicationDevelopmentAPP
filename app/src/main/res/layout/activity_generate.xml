@@ -14,13 +14,15 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/barcode_content" />
+            android:text="@string/barcode_content"
+            android:visibility="invisible"/>
 
         <TextView
             android:id="@+id/barcode_content"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:visibility="invisible"/>
     </LinearLayout>
 
     <LinearLayout
@@ -32,7 +34,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/barcode_width" />
+            android:text="@string/barcode_width"
+            android:visibility="invisible"/>
 
         <EditText
             android:id="@+id/barcode_width"
@@ -40,12 +43,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/width_value"
-            android:inputType="number" />
+            android:inputType="number"
+            android:visibility="invisible"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/barcode_height" />
+            android:text="@string/barcode_height"
+            android:visibility="invisible"/>
 
         <EditText
             android:id="@+id/barcode_height"
@@ -53,7 +58,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:hint="@string/height_value"
-            android:inputType="number" />
+            android:inputType="number"
+            android:visibility="invisible"/>
     </LinearLayout>
 
     <LinearLayout
@@ -67,27 +73,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/barcode_type" />
+            android:text="@string/barcode_type"
+            android:visibility="invisible"/>
 
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:id="@+id/generate_type"
-            android:entries="@array/spinnerarr_type" />
+            android:entries="@array/spinnerarr_type"
+            android:visibility="invisible"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/barcode_margin" />
+            android:text="@string/barcode_margin"
+            android:visibility="invisible"/>
 
         <Spinner
             android:id="@+id/generate_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:entries="@array/spinnerarr_margin" />
+            android:entries="@array/spinnerarr_margin"
+            android:visibility="invisible"/>
     </LinearLayout>
 
     <LinearLayout
@@ -100,24 +110,28 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/barcode_color" />
+            android:text="@string/barcode_color"
+            android:visibility="invisible"/>
 
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/generate_color"
-            android:entries="@array/spinnerarr_color" />
+            android:entries="@array/spinnerarr_color"
+            android:visibility="invisible"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/barcode_backgroundcolor" />
+            android:text="@string/barcode_backgroundcolor"
+            android:visibility="invisible"/>
 
         <Spinner
             android:id="@+id/generate_backgroundcolor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:entries="@array/spinnerarr_backgroundcolor" />
+            android:entries="@array/spinnerarr_backgroundcolor"
+            android:visibility="invisible"/>
     </LinearLayout>
 
 

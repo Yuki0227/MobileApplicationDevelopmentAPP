@@ -20,31 +20,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".task.GenerateActivity"></activity>
-        <activity android:name=".task.ScanCodeActivity" />
-        <activity android:name=".exercise.activity.HistoryActivity" />
-        <activity android:name=".exercise.activity.SubmitActivity" />
-        <activity android:name=".bbs.Activity.ReleaseActivity" />
-        <activity android:name=".task.TaskUpdateActivity" />
-        <activity android:name=".bbs.Activity.ItemShowActivity" />
-        <activity android:name=".task.TaskAddActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|screenSize" android:name=".task.GenerateActivity"></activity>
+        <activity android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|screenSize" android:name=".task.ScanCodeActivity" />
+        <activity android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|screenSize" android:name=".exercise.activity.HistoryActivity" />
+        <activity android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|screenSize" android:name=".exercise.activity.SubmitActivity" />
+        <activity android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|screenSize" android:name=".bbs.Activity.ReleaseActivity" />
+        <activity android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|screenSize" android:name=".task.TaskUpdateActivity" />
+        <activity android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|screenSize" android:name=".bbs.Activity.ItemShowActivity" />
+        <activity android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|screenSize" android:name=".task.TaskAddActivity" />
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".login.RegisterActivity" />
-        <activity android:name=".login.LoginActivity" />
+        <activity android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|screenSize" android:name=".login.RegisterActivity" />
+        <activity android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|screenSize" android:name=".login.LoginActivity" />
         <activity android:name=".email.activity.ConfigActivity" />
         <activity android:name=".email.activity.SendActivity" />
         <activity android:name=".email.activity.ListActivity" />
         <activity android:name=".email.activity.WatchActivity" />
         <activity android:name=".email.activity.SettingsActivity" />
-        <activity android:name=".exercise.activity.SettingActivity" />
-        <activity android:name=".exercise.activity.QuestionActivity" />
-        <activity android:name=".exercise.activity.ResultActivity" />
+        <activity android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|screenSize" android:name=".exercise.activity.SettingActivity" />
+        <activity android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|screenSize" android:name=".exercise.activity.QuestionActivity" />
+        <activity android:screenOrientation="portrait" android:configChanges="orientation|keyboardHidden|screenSize" android:name=".exercise.activity.ResultActivity" />
     </application>
 
 </manifest>

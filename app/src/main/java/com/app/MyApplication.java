@@ -3,6 +3,7 @@ package com.app;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
 
@@ -25,6 +26,20 @@ public class MyApplication extends Application {
     //数据库中的所有用户
     private static List<User> allUsers;
 
+    private static void restoreEmailStatus() {
+        new Handler().postDelayed(() -> {
+            MicroKV kv = MicroKV.customize("config", true);
+            if (kv.containsKV("account")) {
+                EmailKit.Config config = new EmailKit.Config()
+                        .setAccount(kv.getString("account"))
+                        .setPassword(kv.getString("password"))
+                        .setSMTP(kv.getString("smtp_host"), kv.getInt("smtp_port"), kv.getBoolean("smtp_ssl"))
+                        .setIMAP(kv.getString("imap_host"), kv.getInt("imap_port"), kv.getBoolean("imap_ssl"));
+                MyApplication.setConfig(config);
+            }
+        }, 0);
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -40,6 +55,7 @@ public class MyApplication extends Application {
 
         try {
             restoreLoginStatus();
+            restoreEmailStatus();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -54,7 +70,6 @@ public class MyApplication extends Application {
             user = new User(kv.getInt("id"), kv.getString("name"), kv.getString("password"));
             Log.e("restoreUser", user.toString());
         }
-
         MyApplication.setUser(user);
     }
 
@@ -81,7 +96,6 @@ public class MyApplication extends Application {
                     .setKV("name", user.getName())
                     .setKV("password", user.getPassword())
                     .save();
-
         } else {
             MicroKV.defaultMicroKV().clear();
         }

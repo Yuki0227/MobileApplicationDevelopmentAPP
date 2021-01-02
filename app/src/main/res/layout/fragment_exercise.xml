@@ -5,20 +5,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".exercise.ExerciseFragment"
-    android:paddingTop="24dp">
+    android:paddingTop="24dp"
+    android:background="#F0F8FF">
 
     <Button
         android:id="@+id/exercise_btn_do"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="随机答题" />
+
+        android:layout_marginTop="100dp"
+        android:text="随机答题"
+
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:background="@drawable/ic_click_bt"/>
 
     <Button
         android:id="@+id/exercise_btn_history"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/exercise_btn_do"
-        android:text="查看历史" />
+        android:text="查看历史"
+        android:gravity="center"
+        android:layout_marginTop="25dp"
+
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:background="@drawable/ic_click_bt"/>
 
 
 </RelativeLayout>

@@ -30,10 +30,11 @@
             android:maxLines="2"
             android:ellipsize="end" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/spline"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/color_divider"
+            android:layout_marginTop="10dp"/>
 
     </LinearLayout>
 </LinearLayout>

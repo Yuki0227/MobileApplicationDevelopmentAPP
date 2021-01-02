@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".exercise.activity.SubmitActivity">
+    tools:context=".exercise.activity.SubmitActivity"
+    android:background="#F0F8FF">
 
 
     <EditText
@@ -13,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="394dp"
         android:layout_marginStart="21dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="21dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/bg_edittext"
@@ -26,10 +27,13 @@
         android:textSize="16sp" />
     <Button
         android:id="@+id/btn_submit"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:text="确定提交"
-        android:background="@color/blue"/>
+        android:textColor="@color/white"
+        android:background="@drawable/ic_click_bt"
+        android:layout_marginTop="20dp"/>
 
 
 </LinearLayout>

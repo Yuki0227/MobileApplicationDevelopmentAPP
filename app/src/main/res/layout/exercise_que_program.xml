@@ -11,12 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <Button
-                android:id="@+id/exercise_btn_submit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/blue"
-                android:text="提交答案" />
+
 
 
             <TextView
@@ -24,7 +19,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/blue"
                 android:padding="8dp"
-                android:text="Description" />
+                android:text="Description"
+                android:textColor="@color/white"/>
 
         </LinearLayout>
 
@@ -40,7 +36,8 @@
             android:layout_height="wrap_content"
             android:background="@color/blue"
             android:padding="8dp"
-            android:text="input" />
+            android:text="input"
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/exercise_program_tv_input"
@@ -53,7 +50,8 @@
             android:layout_height="wrap_content"
             android:background="@color/blue"
             android:padding="8dp"
-            android:text="output" />
+            android:text="output"
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/exercise_program_tv_output"
@@ -66,7 +64,8 @@
             android:layout_height="wrap_content"
             android:background="@color/blue"
             android:padding="8dp"
-            android:text="sample_input" />
+            android:text="sample_input"
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/exercise_program_tv_sample_input"
@@ -79,13 +78,24 @@
             android:layout_height="wrap_content"
             android:background="@color/blue"
             android:padding="8dp"
-            android:text="sample_output" />
+            android:text="sample_output"
+            android:textColor="@color/white"/>
 
         <TextView
             android:id="@+id/exercise_program_tv_sample_output"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="8dp" />
+
+        <Button
+            android:id="@+id/exercise_btn_submit"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ic_click_bt"
+            android:textColor="@color/white"
+            android:layout_gravity="center"
+            android:text="提交答案"
+            android:layout_marginBottom="50dp"/>
 
 
 

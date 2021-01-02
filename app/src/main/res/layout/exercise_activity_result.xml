@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.app.exercise.activity.ResultActivity">
+    tools:context="com.app.exercise.activity.ResultActivity"
+    android:background="#F0F8FF">
 
     <include layout="@layout/exercise_layout_top2" />
 
@@ -32,7 +33,7 @@
             android:layout_marginLeft="32dp"
             android:layout_marginTop="8dp"
             android:text="得    分："
-            android:textColor="@color/colorAccent"
+            android:textColor="#FF4040"
             android:textSize="16sp" />
 
         <TextView
@@ -58,11 +59,13 @@
 
     <Button
         android:id="@+id/exercise_result_bt_record"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="10dp"
+        android:layout_gravity="center"
         android:padding="16dp"
         android:text="返回首页"
-        android:textColor="@color/white" />
+        android:textColor="@color/white"
+        android:background="@drawable/ic_click_bt"/>
 </LinearLayout>
 

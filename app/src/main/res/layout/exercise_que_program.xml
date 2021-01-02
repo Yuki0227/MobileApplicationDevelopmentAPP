@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F0F8FF">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +19,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/blue"
-                android:padding="8dp"
+                android:padding="3dp"
                 android:text="Description"
                 android:textColor="@color/white"/>
 
@@ -35,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/blue"
-            android:padding="8dp"
+            android:padding="3dp"
             android:text="input"
             android:textColor="@color/white"/>
 
@@ -49,7 +50,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/blue"
-            android:padding="8dp"
+            android:padding="3dp"
             android:text="output"
             android:textColor="@color/white"/>
 
@@ -63,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/blue"
-            android:padding="8dp"
+            android:padding="3dp"
             android:text="sample_input"
             android:textColor="@color/white"/>
 
@@ -77,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/blue"
-            android:padding="8dp"
+            android:padding="3dp"
             android:text="sample_output"
             android:textColor="@color/white"/>
 

@@ -23,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:layout_marginTop="50dp"
             android:text="选择题数目:"
             android:gravity="center"/>
 
@@ -31,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:dropDownVerticalOffset="30dp"
+            android:layout_marginTop="50dp"
             android:id="@+id/choice_question_number"
             android:entries="@array/exercise_choice_question_num"
             />

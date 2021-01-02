@@ -148,11 +148,11 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     @SuppressLint("SetTextI18n")
     private void initView() {
         //初始化收藏按钮
-        imgCollect = findViewById(R.id.exercise_img_collect);
-        imgCollect.setOnClickListener(this);
+//        imgCollect = findViewById(R.id.exercise_img_collect);
+//        imgCollect.setOnClickListener(this);
         //初始化答题卡按钮
-        imgCard = findViewById(R.id.exercise_img_card);
-        imgCard.setOnClickListener(this);
+//        imgCard = findViewById(R.id.exercise_img_card);
+//        imgCard.setOnClickListener(this);
         //初始化计时器
         chronometer = findViewById(R.id.exercise_mytime);
         chronometer.setBase(SystemClock.elapsedRealtime());
@@ -359,13 +359,13 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             //设置当前进度
             pb.setProgress(pos);
             //设置是否被收藏
-            if (queCollect()) {
-                isCollect = true;
-                imgCollect.setImageResource(R.drawable.exercise_star_on);
-            } else {
-                isCollect = false;
-                imgCollect.setImageResource(R.drawable.exercise_star1);
-            }
+//            if (queCollect()) {
+//                isCollect = true;
+//                imgCollect.setImageResource(R.drawable.exercise_star_on);
+//            } else {
+//                isCollect = false;
+//                imgCollect.setImageResource(R.drawable.exercise_star1);
+//            }
             //滑动切换
             root.setOnTouchListener(new View.OnTouchListener() {
                 @Override

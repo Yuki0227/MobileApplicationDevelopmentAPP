@@ -87,6 +87,9 @@ public class ScanCodeActivity extends AppCompatActivity {
                         //System.out.println("scan-->"+taskAssign);
                         TaskFactory.updateTask(taskAssign);
                         finish();
+                    } else{
+                        CommonUtils.showShortMsg(this, "扫码失败,二维码与任务不匹配");
+                        finish();
                     }
                 }
                 return;

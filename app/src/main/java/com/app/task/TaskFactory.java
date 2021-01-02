@@ -89,9 +89,9 @@ public class TaskFactory {
                 try {
                     Response response = client.newCall(request).execute();
                     if(response.isSuccessful()){
-                        Log.d("response --> ", response.body().string());
+                        //Log.d("response --> ", response.body().string());
                     }else{
-                        Log.d("note --> ", "添加失败");
+                        //Log.d("note --> ", "添加失败");
                         throw new IOException("Unexpected code " + response);
                     }
                 } catch (IOException e) {
@@ -111,7 +111,7 @@ public class TaskFactory {
                 MediaType JSON = MediaType.parse("application/json; charset=utf-8");
                 OkHttpClient client = new OkHttpClient();
                 String json = com.alibaba.fastjson.JSON.toJSONString(taskAssign);
-                Log.d("json --> ", json);
+                //Log.d("json --> ", json);
                 RequestBody body = RequestBody.create(JSON, json);
                 Request request = new Request.Builder()
                         .url("http://8.131.250.250/taskAssign/update")
@@ -120,9 +120,9 @@ public class TaskFactory {
                 try{
                     Response response = client.newCall(request).execute();
                     if(response.isSuccessful()){
-                        Log.d("response --> ", response.body().string());
+                        //Log.d("response --> ", response.body().string());
                     }else{
-                        Log.d("note --> ", "修改失败");
+                        //Log.d("note --> ", "修改失败");
                         throw new IOException("Unexpected code " + response);
                     }
                 } catch (IOException e) {
@@ -149,7 +149,7 @@ public class TaskFactory {
                             .build();
                     Response response = client.newCall(request).execute();
                     String responseData = Objects.requireNonNull(response.body()).string();
-                    Log.d("responseData", responseData);
+                    //Log.d("responseData", responseData);
                     //JSONObject jsonObj = new JSONObject(responseData);
                     JSONArray jsonArray = new JSONArray(responseData);
                     //将json转成TaskAssign对象
@@ -223,7 +223,7 @@ public class TaskFactory {
                             .build();
                     Response response = client.newCall(request).execute();
                     String responseData = Objects.requireNonNull(response.body()).string();
-                    Log.d("responseData", responseData);
+                    //Log.d("responseData", responseData);
                     //将JSON字符串转换成对象链表(这个地方有待进一步测试)
                     List<TaskAssign> taskAssignList = new ArrayList<TaskAssign>();
                     taskAssignList = JSON.parseArray(responseData,TaskAssign.class);
@@ -260,7 +260,7 @@ public class TaskFactory {
                             .build();
                     Response response = client.newCall(request).execute();
                     String responseData = Objects.requireNonNull(response.body()).string();
-                    Log.d("responseData", responseData);
+                    //Log.d("responseData", responseData);
                     //将JSON字符串转换成对象链表(这个地方有待进一步测试)
                     List<TaskAssign> taskAssignList = new ArrayList<TaskAssign>();
                     taskAssignList = JSON.parseArray(responseData,TaskAssign.class);
@@ -299,7 +299,7 @@ public class TaskFactory {
                     Response response = client.newCall(request).execute();
                     String responseData = Objects.requireNonNull(response.body()).string();
                     //打印日志
-                    Log.d("responseData", responseData);
+                    //Log.d("responseData", responseData);
                     JSONArray jsonArray = new JSONArray(responseData);
                     List<User> tmp = new ArrayList<User>();
                     if(jsonArray != null && jsonArray.length() > 0){

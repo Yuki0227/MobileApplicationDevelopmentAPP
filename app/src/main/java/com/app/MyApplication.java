@@ -56,6 +56,7 @@ public class MyApplication extends Application {
         try {
             restoreLoginStatus();
             restoreEmailStatus();
+
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -64,8 +64,8 @@ public class TaskUpdateActivity extends AppCompatActivity {
                 user_number++;
                 if(userList.get(i).getId().equals(assigneeId)){
                     task_update_username.setText(userList.get(i).getName());
-                    Log.d(Tag,userList.get(i).getName());
-                    Log.d(Tag,String.valueOf(user_number));
+                    //Log.d(Tag,userList.get(i).getName());
+                    //Log.d(Tag,String.valueOf(user_number));
                     break;
                 }
             }

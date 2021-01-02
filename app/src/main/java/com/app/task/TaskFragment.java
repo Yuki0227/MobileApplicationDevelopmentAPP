@@ -90,7 +90,7 @@ public class TaskFragment extends Fragment {
                 switch (item.getItemId()){
                     case R.id.menu_task_add:
                         //System.out.println("add --> ");
-                        Toast.makeText(getContext(),"click",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(),"click",Toast.LENGTH_SHORT).show();
                         //System.out.println("add --> ***");
                         if(MyApplication.getUser() != null){
                             Intent intent = new Intent(getActivity(),TaskAddActivity.class);
@@ -100,8 +100,8 @@ public class TaskFragment extends Fragment {
                         }
                         break;
                     case R.id.menu_task_search_all:
-                        System.out.println("all --> ");
-                        Toast.makeText(getContext(),"点击了查询所有",Toast.LENGTH_SHORT).show();
+                        //System.out.println("all --> ");
+                        //Toast.makeText(getContext(),"点击了查询所有",Toast.LENGTH_SHORT).show();
                         if(MyApplication.getUser() == null){
                             CommonUtils.showShortMsg(getContext(),"请先登录后再使用此功能");
                             break;
@@ -119,8 +119,8 @@ public class TaskFragment extends Fragment {
                         taskListViewAdapter.notifyDataSetChanged();
                         break;
                     case R.id.menu_task_search_created:
-                        System.out.println("created --> ");
-                        Toast.makeText(getContext(),"点击了查询自己创建的",Toast.LENGTH_SHORT).show();
+                        //System.out.println("created --> ");
+                        //Toast.makeText(getContext(),"点击了查询自己创建的",Toast.LENGTH_SHORT).show();
                         if(MyApplication.getUser() == null){
                             CommonUtils.showShortMsg(getContext(),"请先登录后再使用此功能");
                             break;
@@ -139,8 +139,8 @@ public class TaskFragment extends Fragment {
                         taskListViewAdapter.notifyDataSetChanged();
                         break;
                     case R.id.menu_task_search_assigneed:
-                        System.out.println("assigneed --> ");
-                        Toast.makeText(getContext(),"点击了查询被分配的",Toast.LENGTH_SHORT).show();
+                        //System.out.println("assigneed --> ");
+                        //Toast.makeText(getContext(),"点击了查询被分配的",Toast.LENGTH_SHORT).show();
                         if(MyApplication.getUser() == null){
                             CommonUtils.showShortMsg(getContext(),"请先登录后再使用此功能");
                             break;
@@ -184,7 +184,7 @@ public class TaskFragment extends Fragment {
 
     @Override
     public void onResume() {
-        System.out.println("search_mode --> " + search_mode);
+        //System.out.println("search_mode --> " + search_mode);
 
         super.onResume();
         if(MyApplication.getUser() == null) return ;
@@ -202,7 +202,7 @@ public class TaskFragment extends Fragment {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getContext(),"长按" + position,Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(),"长按" + position,Toast.LENGTH_SHORT).show();
 
                 //获取任务的各项内容
                 TaskAssign taskAssign = taskAssignList.get(position);
@@ -234,15 +234,15 @@ public class TaskFragment extends Fragment {
         if(search_mode == 0 && TaskFactory.getTask(MyApplication.getUser().getId()) != null){
             //taskAssignList = TaskFactory.getTask(MyApplication.getUser().getId());
             taskAssignList.addAll(TaskFactory.getTask(MyApplication.getUser().getId()));
-            Log.d("allTask --> " , TaskFactory.getTask(MyApplication.getUser().getId()).toString());
+            //Log.d("allTask --> " , TaskFactory.getTask(MyApplication.getUser().getId()).toString());
         }else if(search_mode == 1 && TaskFactory.findAllCreatedTask(MyApplication.getUser().getId()) != null){
             //taskAssignList = TaskFactory.findAllCreatedTask(MyApplication.getUser().getId());
             taskAssignList.addAll(TaskFactory.findAllCreatedTask(MyApplication.getUser().getId()));
-            Log.d("createdTask --> " , TaskFactory.findAllCreatedTask(MyApplication.getUser().getId()).toString());
+            //Log.d("createdTask --> " , TaskFactory.findAllCreatedTask(MyApplication.getUser().getId()).toString());
         }else if(search_mode == 2 && TaskFactory.findAllAssignedTask(MyApplication.getUser().getId()) != null){
             //taskAssignList = TaskFactory.findAllAssignedTask(MyApplication.getUser().getId());
             taskAssignList.addAll(TaskFactory.findAllAssignedTask(MyApplication.getUser().getId()));
-            Log.d("assigneedTask --> " , TaskFactory.findAllAssignedTask(MyApplication.getUser().getId()).toString());
+            //Log.d("assigneedTask --> " , TaskFactory.findAllAssignedTask(MyApplication.getUser().getId()).toString());
         }
         taskListViewAdapter = new TaskListViewAdapter(getContext(), taskAssignList);
         listView.setAdapter(taskListViewAdapter);
@@ -252,7 +252,7 @@ public class TaskFragment extends Fragment {
             public void onItemClick(View view, int position) {
                 switch (view.getId()){
                     case R.id.iv_delete:
-                        System.out.println("iv_delete --> ");
+                        //System.out.println("iv_delete --> ");
                         Integer deleted_task_id = taskAssignList.get(position).getId();
                         taskAssignList.remove(position);
                         TaskFactory.deleteTask(deleted_task_id);
@@ -261,7 +261,7 @@ public class TaskFragment extends Fragment {
                         //listView.setAdapter(taskListViewAdapter);
                         break;
                     case R.id.iv_done:
-                        System.out.println("iv_done --> ");
+                        //System.out.println("iv_done --> ");
                         Integer status = taskAssignList.get(position).getStatus();
                         TaskAssign taskAssign = taskAssignList.get(position);
                         if(status == 0){

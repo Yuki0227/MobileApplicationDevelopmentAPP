@@ -1,7 +1,5 @@
 package com.app.task;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -19,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.app.R;
 import com.huawei.hms.hmsscankit.ScanUtil;
@@ -164,7 +164,7 @@ public class GenerateActivity extends AppCompatActivity {
     }
 
     /**
-     * Save the barcode.
+     * Save the barcode
      */
     public void saveCodeBtnClick(View v) {
         if (resultImage == null) {

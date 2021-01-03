@@ -3,6 +3,8 @@ package com.app.task;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -88,8 +90,18 @@ public class ScanCodeActivity extends AppCompatActivity {
                         TaskFactory.updateTask(taskAssign);
                         finish();
                     } else{
-                        CommonUtils.showShortMsg(this, "扫码失败,二维码与任务不匹配");
-                        finish();
+                        //CommonUtils.showShortMsg(this, "扫码失败,二维码与任务不匹配");
+                        //CommonUtils.showDlgMsg(this,"扫码失败,二维码与任务不匹配");
+                        //finish();
+                        new AlertDialog.Builder(this)
+                                .setTitle("")
+                                .setMessage("二维码与任务不匹配")
+                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        finish();
+                                    }
+                                }).create().show();
                     }
                 }
                 return;
